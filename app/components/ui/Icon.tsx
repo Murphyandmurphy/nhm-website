@@ -8,7 +8,7 @@ type IconProps = {
   size?: number;
   stroke?: number;
   color?: string;
-} & Omit<LucideProps, "ref" | "size" | "color">;
+} & Omit<LucideProps, "ref" | "size" | "color" | "stroke">;
 
 /**
  * Icon — thin wrapper over lucide-react. `name` is a PascalCase icon name,
