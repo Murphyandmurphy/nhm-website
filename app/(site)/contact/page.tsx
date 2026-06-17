@@ -26,7 +26,7 @@ export default async function ContactPage() {
   const data = await sanityFetch<Data>(contactPageQuery);
   const page: ContactDoc = data?.page || {};
   const s: ContactSettings = data?.settings || {};
-  const email = s.email || "nadia@helloappetit.co.uk";
+  const email = s.email || "hello@nadiahm.co.uk";
   const phone = s.phone || "07712 120 104";
   const linkedin = s.linkedinUrl || "https://www.linkedin.com";
 

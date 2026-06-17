@@ -21,11 +21,11 @@ const DEFAULT_LINKS: NavLink[] = [
 
 export function Footer({ settings }: { settings?: Settings }) {
   const s = settings || {};
-  const email = s.email || "nadia@helloappetit.co.uk";
+  const email = s.email || "hello@nadiahm.co.uk";
   const phone = s.phone || "07712 120 104";
   const linkedin = s.linkedinUrl || "https://www.linkedin.com";
   const tagline = s.tagline || "Senior strategic marketing support for food & drink SMEs with real ambitions to grow.";
-  const brand = s.brandName || "Appétit";
+  const brand = s.brandName || "Nadia Henrique-Murray";
   const links = s.footerLinks && s.footerLinks.length ? s.footerLinks : DEFAULT_LINKS;
 
   return (

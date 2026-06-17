@@ -256,7 +256,7 @@ function InfoCardsBlock({ b }: { b: Block }) {
 async function ContactBlock({ b }: { b: Block }) {
   const data = await sanityFetch<{ settings: { email?: string; phone?: string; linkedinUrl?: string } | null }>(contactPageQuery);
   const s = data?.settings || {};
-  const email = s.email || "nadia@helloappetit.co.uk";
+  const email = s.email || "hello@nadiahm.co.uk";
   const phone = s.phone || "07712 120 104";
   const linkedin = s.linkedinUrl || "https://www.linkedin.com";
   return (

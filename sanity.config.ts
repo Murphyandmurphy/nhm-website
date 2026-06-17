@@ -7,7 +7,7 @@ import { structure } from "@/sanity/structure";
 
 export default defineConfig({
   basePath: "/studio",
-  title: "Appétit — Nadia Henrique-Murray",
+  title: "Nadia Henrique-Murray",
   projectId,
   dataset,
   schema,

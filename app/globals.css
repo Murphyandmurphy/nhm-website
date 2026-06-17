@@ -1,5 +1,5 @@
 /* ============================================================
-   Nadia Henrique-Murray / Appétit — global stylesheet
+  Nadia Henrique-Murray — global stylesheet
    Tailwind layers + design-system tokens + component & layout CSS.
    Fonts are injected by next/font (see app/layout.tsx), which exposes
    --font-larken and --font-hanken; we alias them to the brand roles.
