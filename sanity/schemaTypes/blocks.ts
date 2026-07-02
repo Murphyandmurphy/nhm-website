@@ -81,6 +81,37 @@ export const imageTextSection = defineType({
       options: { list: [{ title: "Left", value: "left" }, { title: "Right", value: "right" }], layout: "radio" },
       initialValue: "left",
     }),
+    defineField({
+      name: "imageAspect",
+      title: "Image shape",
+      type: "string",
+      options: {
+        list: [
+          { title: "Square", value: "square" },
+          { title: "Portrait (tall)", value: "portrait" },
+          { title: "Landscape (wide)", value: "landscape" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "square",
+    }),
+    defineField({
+      name: "stats",
+      title: "Stats (optional)",
+      description: "Big numbers shown under the text, e.g. 25+ / years' experience.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "stat",
+          fields: [
+            defineField({ name: "value", title: "Value", type: "string" }),
+            defineField({ name: "label", title: "Label", type: "string" }),
+          ],
+          preview: { select: { title: "value", subtitle: "label" } },
+        }),
+      ],
+    }),
     toneField,
   ],
   preview: { select: { subtitle: "heading" }, prepare: ({ subtitle }) => ({ title: "Image & Text", subtitle }) },
@@ -205,7 +236,23 @@ export const logoStripSection = defineType({
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
     defineField({ name: "title", title: "Title", type: "text", rows: 2, description: EM }),
     defineField({ name: "lead", title: "Lead", type: "text", rows: 2 }),
-    defineField({ name: "brands", title: "Brand names", type: "array", of: [{ type: "string" }] }),
+    defineField({
+      name: "brands",
+      title: "Brands",
+      description: "Each brand shows its logo if uploaded, otherwise the name as text.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "brand",
+          fields: [
+            defineField({ name: "name", title: "Brand name", type: "string" }),
+            defineField({ name: "logo", title: "Logo (transparent PNG)", type: "image" }),
+          ],
+          preview: { select: { title: "name", media: "logo" } },
+        }),
+      ],
+    }),
     defineField({ name: "note", title: "Note under logos", type: "string" }),
     toneField,
   ],
@@ -281,8 +328,50 @@ export const contactSection = defineType({
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Contact + Form", subtitle: title }) },
 });
 
+/* 12. SERVICES HERO — the Services page intro with an auto "jump to" nav. */
+export const servicesHeroSection = defineType({
+  name: "servicesHeroSection",
+  title: "Services Hero (with jump nav)",
+  type: "object",
+  fields: [
+    defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+    defineField({ name: "title", title: "Title", type: "text", rows: 2, description: EM }),
+    defineField({ name: "lead", title: "Lead", type: "text", rows: 3 }),
+    defineField({
+      name: "showJumpNav",
+      title: 'Show "jump to" buttons',
+      description: "Automatically lists every Service Detail block below on this page.",
+      type: "boolean",
+      initialValue: true,
+    }),
+    toneField,
+  ],
+  preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Services Hero", subtitle: title }) },
+});
+
+/* 13. SERVICE DETAIL — one in-depth service (need / solution / checklist). */
+export const serviceDetailSection = defineType({
+  name: "serviceDetailSection",
+  title: "Service Detail",
+  type: "object",
+  fields: [
+    defineField({ name: "number", title: "Number", type: "string", description: 'e.g. "01"' }),
+    defineField({ name: "icon", title: "Icon", type: "string", options: { list: ICON_OPTIONS } }),
+    defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({ name: "need", title: "The need", type: "text", rows: 4, description: EM }),
+    defineField({ name: "solution", title: "The solution", type: "text", rows: 4, description: EM }),
+    defineField({ name: "items", title: "What it looks like (checklist)", type: "array", of: [defineArrayMember({ type: "string" })] }),
+    defineField({ name: "ctaLabel", title: "Button label", type: "string" }),
+    defineField({ name: "ctaHref", title: "Button link", type: "string", initialValue: "/contact" }),
+    toneField,
+  ],
+  preview: { select: { title: "title", subtitle: "number" }, prepare: ({ title, subtitle }) => ({ title: title || "Service Detail", subtitle }) },
+});
+
 const rawBlockTypes = [
   heroSection,
+  servicesHeroSection,
+  serviceDetailSection,
   imageTextSection,
   serviceCardsSection,
   featureGridSection,
@@ -302,3 +391,15 @@ export const blockTypes = rawBlockTypes.map((t) => ({
 }));
 
 export const blockNames = blockTypes.map((b) => ({ type: b.name }));
+
+/**
+ * Shared options for every "Sections" array field. Turns the "Add item"
+ * picker into a visual GRID of section tiles (layout icon + name) so a
+ * non-technical editor can see what each section looks like before adding it.
+ */
+export const sectionArrayOptions = {
+  insertMenu: {
+    showIcons: true,
+    views: [{ name: "grid" as const }, { name: "list" as const }],
+  },
+};

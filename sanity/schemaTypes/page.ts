@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { blockNames } from "./blocks";
+import { blockNames, sectionArrayOptions } from "./blocks";
 
 /**
  * Page — a builder page. Editors set a title + URL, then stack section
@@ -24,6 +24,7 @@ export const page = defineType({
       title: "Sections",
       description: "Add, drag to reorder, duplicate or delete sections to build the page.",
       type: "array",
+      options: sectionArrayOptions,
       of: blockNames.map((b) => defineArrayMember({ type: b.type })),
     }),
   ],

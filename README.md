@@ -1,6 +1,6 @@
-# Nadia Henrique-Murray — Website
+# Nadia Henrique-Murray / Appétit — Website
 
-Marketing site for Nadia Henrique-Murray, fully editable via **Sanity CMS**.
+Marketing site for Nadia Henrique-Murray (brand "Appétit"), fully editable via **Sanity CMS**.
 
 **Stack:** Next.js 15 (App Router) · TypeScript · Tailwind CSS · Framer Motion ·
 `next/font` (Larken + Hanken Grotesk) · lucide-react · **Sanity** (embedded Studio).
@@ -21,7 +21,7 @@ npm install
 
 ### b. Create a free Sanity project
 1. Go to **https://www.sanity.io/manage** and sign in (free account).
-2. Click **Create project** → name it (e.g. "Nadia Henrique-Murray"). Use dataset **`production`** (public is fine).
+2. Click **Create project** → name it (e.g. "Appétit"). Use dataset **`production`** (public is fine).
 3. Copy the **Project ID** shown on the project page.
 
 ### c. Add your environment variables

@@ -13,6 +13,7 @@ import { Reveal } from "./Reveal";
 import { RichText, RichHeading, parseInline } from "./rich";
 import { SanityImage } from "./SanityImage";
 import { TestimonialCarousel, type TestimonialItem } from "./interactive/TestimonialCarousel";
+import { AnchorNav } from "./interactive/AnchorNav";
 import { ContactForm } from "./interactive/ContactForm";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { contactPageQuery } from "@/sanity/lib/queries";
@@ -74,13 +75,16 @@ function HeroBlock({ b }: { b: Block }) {
 
 function ImageTextBlock({ b }: { b: Block }) {
   const left = (b.imageSide || "left") === "left";
+  const aspect = b.imageAspect === "portrait" ? "4 / 5" : b.imageAspect === "landscape" ? "3 / 2" : "1 / 1";
+  const stats: { value?: string; label?: string }[] = b.stats || [];
+  const dark = b.tone === "blue" || b.tone === "ink";
   const image = (
     <Reveal>
       <SanityImage
         image={b.image as SanityImageValue}
         alt=""
         fallback={{ label: "Image", icon: "Image", tone: "cream" }}
-        style={{ aspectRatio: "1 / 1", minHeight: "320px" }}
+        style={{ aspectRatio: aspect, minHeight: "320px" }}
       />
     </Reveal>
   );
@@ -89,6 +93,13 @@ function ImageTextBlock({ b }: { b: Block }) {
       {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
       {b.heading ? <h2 className="shead__title" style={{ marginTop: "1rem" }}>{parseInline(b.heading)}</h2> : null}
       <RichText text={b.body} className="prose" style={{ marginTop: "1.25rem" }} />
+      {stats.length ? (
+        <div style={{ display: "flex", gap: "3rem", flexWrap: "wrap", margin: "2rem 0" }}>
+          {stats.map((st, i) => (
+            <Stat key={i} value={st.value} label={st.label} tone={dark ? "onblue" : "default"} />
+          ))}
+        </div>
+      ) : null}
       {b.ctaLabel ? (
         <div style={{ marginTop: "1.75rem" }}>
           <Button variant="ghost" iconRight="ArrowRight" href={b.ctaHref || "/contact"}>
@@ -103,6 +114,71 @@ function ImageTextBlock({ b }: { b: Block }) {
       <div className="grid-2">
         {left ? image : text}
         {left ? text : image}
+      </div>
+    </Section>
+  );
+}
+
+function ServicesHeroBlock({ b, navItems }: { b: Block; navItems: { id: string; num: string; name: string }[] }) {
+  return (
+    <Section tone={(b.tone as Tone) || "cream"} style={{ paddingBottom: "var(--space-7)" }}>
+      <Reveal>
+        {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
+        <RichHeading as="h1" text={b.title} className="hero__title" style={{ fontSize: "var(--text-h1)", marginTop: "1rem", maxWidth: "16ch" }} />
+        {b.lead ? <p className="shead__lead" style={{ maxWidth: "52ch", marginTop: "0.5rem" }}>{b.lead}</p> : null}
+        {b.showJumpNav !== false && navItems.length ? <AnchorNav items={navItems} /> : null}
+      </Reveal>
+    </Section>
+  );
+}
+
+function ServiceDetailBlock({ b, anchorId, first }: { b: Block; anchorId: string; first?: boolean }) {
+  return (
+    <Section tone={(b.tone as Tone) || "white"} style={first ? { paddingTop: 0 } : undefined}>
+      <div className="svc" id={"svc-" + anchorId}>
+        <Reveal>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span className="svc__num">{b.number?.replace(/\D/g, "") || ""}</span>
+          </div>
+          {b.icon ? (
+            <div style={{ width: 52, height: 52, borderRadius: "var(--radius-md)", background: "var(--blue-50)", color: "var(--blue-600)", display: "flex", alignItems: "center", justifyContent: "center", margin: "1rem 0" }}>
+              <Icon name={b.icon as IconName} size={26} stroke={1.6} />
+            </div>
+          ) : null}
+          <h2 className="svc__name">{b.title}</h2>
+          {b.ctaLabel ? (
+            <div style={{ marginTop: "1.5rem" }}>
+              <Button variant="primary" iconRight="ArrowRight" href={b.ctaHref || "/contact"}>{b.ctaLabel}</Button>
+            </div>
+          ) : null}
+        </Reveal>
+        <Reveal delay={0.08}>
+          {b.need ? (
+            <div className="needblock">
+              <p className="needblock__k">The need</p>
+              <RichText text={b.need} />
+            </div>
+          ) : null}
+          {b.solution ? (
+            <div className="needblock">
+              <p className="needblock__k">The solution</p>
+              <RichText text={b.solution} />
+            </div>
+          ) : null}
+          {b.items && b.items.length ? (
+            <>
+              <p className="needblock__k">What it looks like</p>
+              <ul className="checklist">
+                {b.items.map((it: string, i: number) => (
+                  <li key={i}>
+                    <Icon name="Check" size={20} stroke={2} />
+                    <span>{it}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+        </Reveal>
       </div>
     </Section>
   );
@@ -256,7 +332,7 @@ function InfoCardsBlock({ b }: { b: Block }) {
 async function ContactBlock({ b }: { b: Block }) {
   const data = await sanityFetch<{ settings: { email?: string; phone?: string; linkedinUrl?: string } | null }>(contactPageQuery);
   const s = data?.settings || {};
-  const email = s.email || "hello@nadiahm.co.uk";
+  const email = s.email || "nadia@helloappetit.co.uk";
   const phone = s.phone || "07712 120 104";
   const linkedin = s.linkedinUrl || "https://www.linkedin.com";
   return (
@@ -292,12 +368,26 @@ async function ContactBlock({ b }: { b: Block }) {
 /** Sections — renders a stack of builder blocks in order. */
 export function Sections({ sections }: { sections?: Block[] }) {
   if (!sections || !sections.length) return null;
+  // Build the "jump to" nav from any Service Detail blocks on the page.
+  const details = sections.filter((b) => b._type === "serviceDetailSection");
+  const navItems = details.map((b, i) => ({
+    id: b._key || String(i),
+    num: b.number?.replace(/\D/g, "") || "",
+    name: b.title || "",
+  }));
+  const firstDetailKey: string | null = details.length ? (details[0]._key || "0") : null;
   return (
     <>
       {sections.map((b, i) => {
         const key = b._key || i;
         switch (b._type) {
           case "heroSection": return <HeroBlock key={key} b={b} />;
+          case "servicesHeroSection": return <ServicesHeroBlock key={key} b={b} navItems={navItems} />;
+          case "serviceDetailSection": {
+            const anchorId = b._key || String(i);
+            const isFirst = anchorId === firstDetailKey;
+            return <ServiceDetailBlock key={key} b={b} anchorId={anchorId} first={isFirst} />;
+          }
           case "imageTextSection": return <ImageTextBlock key={key} b={b} />;
           case "serviceCardsSection": return <ServiceCardsBlock key={key} b={b} />;
           case "featureGridSection": return <FeatureGridBlock key={key} b={b} />;

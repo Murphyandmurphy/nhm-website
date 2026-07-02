@@ -109,9 +109,20 @@ const ContactIcon = () => (
   </F>
 );
 
+const ServiceDetailIcon = () => (
+  <F>
+    <text x="4.5" y="11" fontSize="6" fill="currentColor" stroke="none" opacity={0.6}>01</text>
+    <line x1="12" y1="9" x2="20" y2="9" />
+    <line x1="12" y1="12" x2="20" y2="12" />
+    <line x1="12" y1="15" x2="17" y2="15" />
+  </F>
+);
+
 /** Map of block type name → wireframe icon component. */
 export const BLOCK_ICONS: Record<string, React.FC> = {
   heroSection: HeroIcon,
+  servicesHeroSection: HeroIcon,
+  serviceDetailSection: ServiceDetailIcon,
   imageTextSection: ImageTextIcon,
   serviceCardsSection: ServiceCardsIcon,
   featureGridSection: FeatureGridIcon,

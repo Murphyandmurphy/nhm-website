@@ -7,29 +7,16 @@ export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
   "footerLinks": footerLinks[]{ label, "href": coalesce(customHref, "/" + page->slug.current) }
 }`;
 
-export const homePageQuery = groq`{
-  "page": *[_type == "homePage"][0],
-  "services": *[_type == "service"] | order(order asc){
-    icon, number, title, shortDescription
-  },
-  "testimonials": *[_type == "testimonial"] | order(order asc){
-    quote, name, role
-  }
+export const homePageQuery = groq`*[_type == "homePage"][0]{
+  "sections": sections[]{ ... }
 }`;
 
-export const servicesPageQuery = groq`{
-  "page": *[_type == "servicesPage"][0],
-  "services": *[_type == "service"] | order(order asc){
-    "id": _id, order, icon, number, title, need, solution, items, ctaLabel
-  }
+export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
+  "sections": sections[]{ ... }
 }`;
 
 export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
-  heroEyebrow, heroTitle, heroBody, heroImage,
-  storyBody,
-  brandsEyebrow, brandsTitle, brandsLead, brands, brandsNote,
-  approachEyebrow, approachTitle, approach,
-  ctaTitle, ctaBody, ctaLabel
+  "sections": sections[]{ ... }
 }`;
 
 export const insightsPageQuery = groq`{
@@ -40,7 +27,7 @@ export const insightsPageQuery = groq`{
 }`;
 
 export const contactPageQuery = groq`{
-  "page": *[_type == "contactPage"][0],
+  "sections": *[_type == "contactPage"][0].sections[]{ ... },
   "settings": *[_type == "siteSettings"][0]{ email, phone, linkedinUrl }
 }`;
 

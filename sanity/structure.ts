@@ -26,7 +26,5 @@ export const structure: StructureResolver = (S) =>
       ),
       S.divider(),
       // Collections
-      S.documentTypeListItem("service").title("Services"),
-      S.documentTypeListItem("testimonial").title("Testimonials"),
       S.documentTypeListItem("post").title("Insights Posts"),
     ]);
