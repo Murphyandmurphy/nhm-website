@@ -257,9 +257,9 @@ img, svg, video { max-width: 100%; display: block; }
 .ctablock__body { font-size: var(--text-lead); line-height: 1.6; margin: 0 auto 2rem; max-width: 48ch; }
 
 /* Logo strip */
-.logostrip { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2rem 1.5rem; align-items: center; }
-.logochip { display: flex; align-items: center; justify-content: center; min-height: 64px; }
-.logochip__img { max-height: 44px; max-width: 120px; width: auto; height: auto; object-fit: contain; filter: grayscale(1); opacity: 0.6; transition: opacity var(--dur-base) var(--ease-out); }
+.logostrip { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1.25rem 1rem; align-items: stretch; }
+.logochip { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; padding: 0.75rem; background: var(--white); border: 1px solid var(--line-200); border-radius: var(--radius-md); }
+.logochip__img { max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; filter: grayscale(1); opacity: 0.6; transition: opacity var(--dur-base) var(--ease-out); }
 .logochip__img:hover { opacity: 1; }
 .logochip__text { font-family: var(--font-display); font-weight: 300; font-size: 1.35rem; color: var(--ink-700); letter-spacing: -0.01em; opacity: 0.7; }
 
