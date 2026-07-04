@@ -51,7 +51,8 @@ export function Header({ settings }: { settings?: Settings }) {
       <Container>
         <div className="nav__inner">
           <Link href="/" aria-label="Home" style={{ display: "flex" }}>
-            <Image src="/logo/nhm-logo-blue.png" className="nav__logo" alt="Nadia Henrique-Murray" width={53} height={38} priority />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo/nhm-logo-blue.svg" className="nav__logo" alt="Nadia Henrique-Murray" />
           </Link>
           <nav className="nav__right">
             <ul className="nav__links">

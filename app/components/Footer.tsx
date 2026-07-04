@@ -33,7 +33,8 @@ export function Footer({ settings }: { settings?: Settings }) {
       <Container>
         <div className="footer__grid">
           <div>
-            <Image src="/logo/nhm-logo-white.png" className="footer__logo" alt="Nadia Henrique-Murray" width={56} height={40} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo/nhm-logo-white.svg" className="footer__logo" alt="Nadia Henrique-Murray" />
             <p className="footer__tag">{tagline}</p>
             <p className="footer__tag" style={{ marginTop: "1rem", color: "var(--blue-300)" }}>
               {brand}
