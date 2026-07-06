@@ -8,7 +8,13 @@ import { parseInline } from "../rich";
 
 export type TestimonialItem = { quote: string; name: string; role?: string };
 
-export function TestimonialCarousel({ items }: { items: TestimonialItem[] }) {
+export function TestimonialCarousel({
+  items,
+  tone = "default",
+}: {
+  items: TestimonialItem[];
+  tone?: "default" | "onblue";
+}) {
   const [i, setI] = useState(0);
   const list = items && items.length ? items : [];
   const n = list.length;
@@ -29,7 +35,7 @@ export function TestimonialCarousel({ items }: { items: TestimonialItem[] }) {
             exit={{ opacity: 0, y: -14 }}
             transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
           >
-            <Testimonial quote={parseInline(t.quote)} name={t.name} role={t.role} tone="onblue" />
+            <Testimonial quote={parseInline(t.quote)} name={t.name} role={t.role} tone={tone} />
           </motion.div>
         </AnimatePresence>
       </div>

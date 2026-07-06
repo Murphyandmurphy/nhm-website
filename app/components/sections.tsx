@@ -227,12 +227,13 @@ function FeatureGridBlock({ b }: { b: Block }) {
 
 function TestimonialsBlock({ b }: { b: Block }) {
   const items: TestimonialItem[] = (b.quotes || []).map((q: TestimonialItem) => ({ quote: q.quote, name: q.name, role: q.role }));
+  const dark = b.tone === "blue" || b.tone === "ink";
   return (
     <Section tone={(b.tone as Tone) || "blue"}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} />
       </Reveal>
-      <TestimonialCarousel items={items} />
+      <TestimonialCarousel items={items} tone={dark ? "onblue" : "default"} />
     </Section>
   );
 }
