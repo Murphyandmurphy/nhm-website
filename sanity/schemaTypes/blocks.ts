@@ -28,6 +28,43 @@ const toneField = defineField({
   initialValue: "cream",
 });
 
+const sectionSpacingFields = () => [
+  defineField({
+    name: "paddingTop",
+    title: "Top spacing",
+    type: "string",
+    options: {
+      list: [
+        { title: "Default", value: "default" },
+        { title: "None", value: "none" },
+        { title: "Small", value: "sm" },
+        { title: "Medium", value: "md" },
+        { title: "Large", value: "lg" },
+        { title: "Extra large", value: "xl" },
+      ],
+      layout: "dropdown",
+    },
+    initialValue: "default",
+  }),
+  defineField({
+    name: "paddingBottom",
+    title: "Bottom spacing",
+    type: "string",
+    options: {
+      list: [
+        { title: "Default", value: "default" },
+        { title: "None", value: "none" },
+        { title: "Small", value: "sm" },
+        { title: "Medium", value: "md" },
+        { title: "Large", value: "lg" },
+        { title: "Extra large", value: "xl" },
+      ],
+      layout: "dropdown",
+    },
+    initialValue: "default",
+  }),
+];
+
 const cardItem = (withHref = false) =>
   defineArrayMember({
     type: "object",
@@ -58,6 +95,7 @@ export const heroSection = defineType({
     defineField({ name: "secondaryHref", title: "Secondary button link", type: "string" }),
     defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Hero", subtitle: title }) },
 });
@@ -113,6 +151,7 @@ export const imageTextSection = defineType({
       ],
     }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { subtitle: "heading" }, prepare: ({ subtitle }) => ({ title: "Image & Text", subtitle }) },
 });
@@ -128,6 +167,7 @@ export const serviceCardsSection = defineType({
     defineField({ name: "lead", title: "Lead", type: "text", rows: 3 }),
     defineField({ name: "cards", title: "Cards", type: "array", of: [cardItem(true)] }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Service Cards", subtitle: title }) },
 });
@@ -149,6 +189,7 @@ export const featureGridSection = defineType({
     }),
     defineField({ name: "items", title: "Items", type: "array", of: [cardItem(false)] }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Feature Grid", subtitle: title }) },
 });
@@ -194,6 +235,7 @@ export const testimonialsSection = defineType({
       },
       initialValue: "blue",
     }),
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Testimonials", subtitle: title }) },
 });
@@ -223,6 +265,7 @@ export const statsSection = defineType({
       ],
     }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { prepare: () => ({ title: "Stats Row" }) },
 });
@@ -255,6 +298,7 @@ export const logoStripSection = defineType({
     }),
     defineField({ name: "note", title: "Note under logos", type: "string" }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Logo Strip", subtitle: title }) },
 });
@@ -277,6 +321,7 @@ export const ctaSection = defineType({
       initialValue: "blue",
     }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Call to Action", subtitle: title }) },
 });
@@ -292,6 +337,7 @@ export const textSection = defineType({
     defineField({ name: "body", title: "Body (blank line = new paragraph)", type: "text", rows: 10, description: EM }),
     defineField({ name: "narrow", title: "Narrow width (easier reading)", type: "boolean", initialValue: true }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { subtitle: "heading" }, prepare: ({ subtitle }) => ({ title: "Text Block", subtitle }) },
 });
@@ -308,6 +354,7 @@ export const infoCardsSection = defineType({
     defineField({ name: "items", title: "Cards", type: "array", of: [cardItem(false)] }),
     defineField({ name: "showComingSoon", title: 'Show "Coming soon" label', type: "boolean", initialValue: false }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Info Cards", subtitle: title }) },
 });
@@ -324,6 +371,7 @@ export const contactSection = defineType({
     defineField({ name: "successTitle", title: "Form success title", type: "string" }),
     defineField({ name: "successBody", title: "Form success body", type: "text", rows: 3 }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Contact + Form", subtitle: title }) },
 });
@@ -345,6 +393,7 @@ export const servicesHeroSection = defineType({
       initialValue: true,
     }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: "Services Hero", subtitle: title }) },
 });
@@ -364,6 +413,7 @@ export const serviceDetailSection = defineType({
     defineField({ name: "ctaLabel", title: "Button label", type: "string" }),
     defineField({ name: "ctaHref", title: "Button link", type: "string", initialValue: "/contact" }),
     toneField,
+    ...sectionSpacingFields(),
   ],
   preview: { select: { title: "title", subtitle: "number" }, prepare: ({ title, subtitle }) => ({ title: title || "Service Detail", subtitle }) },
 });

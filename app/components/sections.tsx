@@ -22,6 +22,29 @@ import type { SanityImageValue } from "@/app/types";
 type Tone = "cream" | "white" | "paper" | "blue" | "ink";
 type CardData = { icon?: IconName; number?: string; title?: string; body?: string; href?: string };
 
+const sectionPaddingValues: Record<string, string> = {
+  none: "0",
+  sm: "var(--space-7)",
+  md: "var(--space-9)",
+  lg: "var(--space-11)",
+  xl: "var(--space-12)",
+};
+
+function sectionStyle(b: Block, base?: React.CSSProperties) {
+  const style: React.CSSProperties = { ...(base || {}) };
+  const top = b.paddingTop as string | undefined;
+  const bottom = b.paddingBottom as string | undefined;
+
+  if (top && top !== "default" && sectionPaddingValues[top]) {
+    style.paddingTop = sectionPaddingValues[top];
+  }
+  if (bottom && bottom !== "default" && sectionPaddingValues[bottom]) {
+    style.paddingBottom = sectionPaddingValues[bottom];
+  }
+
+  return Object.keys(style).length ? style : undefined;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Block = any;
 
@@ -38,7 +61,7 @@ function Heading({ eyebrow, title, lead }: { eyebrow?: string; title?: string; l
 
 function HeroBlock({ b }: { b: Block }) {
   return (
-    <Section tone={(b.tone as Tone) || "cream"} className="hero">
+    <Section tone={(b.tone as Tone) || "cream"} className="hero" style={sectionStyle(b)}>
       <div className="hero__grid">
         <div>
           <Reveal>
@@ -110,7 +133,7 @@ function ImageTextBlock({ b }: { b: Block }) {
     </Reveal>
   );
   return (
-    <Section tone={(b.tone as Tone) || "white"}>
+    <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b)}>
       <div className="grid-2">
         {left ? image : text}
         {left ? text : image}
@@ -121,7 +144,7 @@ function ImageTextBlock({ b }: { b: Block }) {
 
 function ServicesHeroBlock({ b, navItems }: { b: Block; navItems: { id: string; num: string; name: string }[] }) {
   return (
-    <Section tone={(b.tone as Tone) || "cream"} style={{ paddingBottom: "var(--space-7)" }}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b, { paddingBottom: "var(--space-7)" })}>
       <Reveal>
         {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
         <RichHeading as="h1" text={b.title} className="hero__title" style={{ fontSize: "var(--text-h1)", marginTop: "1rem", maxWidth: "16ch" }} />
@@ -134,7 +157,7 @@ function ServicesHeroBlock({ b, navItems }: { b: Block; navItems: { id: string; 
 
 function ServiceDetailBlock({ b, anchorId, first }: { b: Block; anchorId: string; first?: boolean }) {
   return (
-    <Section tone={(b.tone as Tone) || "white"} style={first ? { paddingTop: 0 } : undefined}>
+    <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b, first ? { paddingTop: 0 } : undefined)}>
       <div className="svc" id={"svc-" + anchorId}>
         <Reveal>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -187,7 +210,7 @@ function ServiceDetailBlock({ b, anchorId, first }: { b: Block; anchorId: string
 function ServiceCardsBlock({ b }: { b: Block }) {
   const cards: CardData[] = b.cards || [];
   return (
-    <Section tone={(b.tone as Tone) || "cream"}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
       </Reveal>
@@ -208,7 +231,7 @@ function FeatureGridBlock({ b }: { b: Block }) {
   const items: CardData[] = b.items || [];
   const cols = b.columns === 3 ? 3 : 2;
   return (
-    <Section tone={(b.tone as Tone) || "white"}>
+    <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b)}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} />
       </Reveal>
@@ -229,7 +252,7 @@ function TestimonialsBlock({ b }: { b: Block }) {
   const items: TestimonialItem[] = (b.quotes || []).map((q: TestimonialItem) => ({ quote: q.quote, name: q.name, role: q.role }));
   const dark = b.tone === "blue" || b.tone === "ink";
   return (
-    <Section tone={(b.tone as Tone) || "blue"}>
+    <Section tone={(b.tone as Tone) || "blue"} style={sectionStyle(b)}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} />
       </Reveal>
@@ -242,7 +265,7 @@ function StatsBlock({ b }: { b: Block }) {
   const stats: { value?: string; label?: string }[] = b.stats || [];
   const dark = b.tone === "blue" || b.tone === "ink";
   return (
-    <Section tone={(b.tone as Tone) || "cream"}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal>
         <Heading title={b.title} eyebrow={b.eyebrow} />
         <div style={{ display: "flex", gap: "3rem", flexWrap: "wrap" }}>
@@ -257,7 +280,7 @@ function StatsBlock({ b }: { b: Block }) {
 
 function LogoStripBlock({ b }: { b: Block }) {
   return (
-    <Section tone={(b.tone as Tone) || "cream"}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
         <LogoStrip brands={b.brands || []} />
@@ -271,7 +294,7 @@ function LogoStripBlock({ b }: { b: Block }) {
 
 function CtaBlock({ b }: { b: Block }) {
   return (
-    <Section tone={(b.tone as Tone) || "cream"}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal>
         <CTABlock
           tone={b.ctaColour === "ink" ? "ink" : "blue"}
@@ -294,7 +317,7 @@ function TextBlock({ b }: { b: Block }) {
     </Reveal>
   );
   return (
-    <Section tone={(b.tone as Tone) || "white"}>
+    <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b)}>
       {b.narrow !== false ? <Container narrow style={{ padding: 0 }}>{body}</Container> : body}
     </Section>
   );
@@ -303,7 +326,7 @@ function TextBlock({ b }: { b: Block }) {
 function InfoCardsBlock({ b }: { b: Block }) {
   const items: CardData[] = b.items || [];
   return (
-    <Section tone={(b.tone as Tone) || "cream"}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
       </Reveal>
@@ -337,7 +360,7 @@ async function ContactBlock({ b }: { b: Block }) {
   const phone = s.phone || "07712 120 104";
   const linkedin = s.linkedinUrl || "https://www.linkedin.com";
   return (
-    <Section tone={(b.tone as Tone) || "cream"}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <div className="contact__grid">
         <Reveal>
           {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
