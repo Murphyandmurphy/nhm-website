@@ -11,7 +11,19 @@ const linkObject = () =>
     name: "navLink",
     fields: [
       defineField({ name: "label", title: "Label", type: "string", validation: (r) => r.required() }),
-      defineField({ name: "page", title: "Link to a Page", type: "reference", to: [{ type: "page" }] }),
+      defineField({
+        name: "page",
+        title: "Link to a Page",
+        type: "reference",
+        to: [
+          { type: "page" },
+          { type: "homePage" },
+          { type: "servicesPage" },
+          { type: "aboutPage" },
+          { type: "insightsPage" },
+          { type: "contactPage" },
+        ],
+      }),
       defineField({
         name: "customHref",
         title: "…or a custom link",

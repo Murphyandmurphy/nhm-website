@@ -3,8 +3,36 @@ import { groq } from "next-sanity";
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
   brandName, tagline, email, phone, linkedinUrl,
   navCtaLabel, navCtaHref,
-  "navItems": navItems[]{ label, "href": coalesce(customHref, "/" + page->slug.current) },
-  "footerLinks": footerLinks[]{ label, "href": coalesce(customHref, "/" + page->slug.current) }
+  "navItems": navItems[]{
+    label,
+    "href": coalesce(
+      customHref,
+      select(
+        page->_type == "homePage" => "/",
+        page->_type == "servicesPage" => "/services",
+        page->_type == "aboutPage" => "/about",
+        page->_type == "insightsPage" => "/insights",
+        page->_type == "contactPage" => "/contact",
+        page->_type == "page" => "/" + page->slug.current,
+        "/"
+      )
+    )
+  },
+  "footerLinks": footerLinks[]{
+    label,
+    "href": coalesce(
+      customHref,
+      select(
+        page->_type == "homePage" => "/",
+        page->_type == "servicesPage" => "/services",
+        page->_type == "aboutPage" => "/about",
+        page->_type == "insightsPage" => "/insights",
+        page->_type == "contactPage" => "/contact",
+        page->_type == "page" => "/" + page->slug.current,
+        "/"
+      )
+    )
+  }
 }`;
 
 export const homePageQuery = groq`*[_type == "homePage"][0]{
