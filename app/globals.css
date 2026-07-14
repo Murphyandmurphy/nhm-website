@@ -254,6 +254,7 @@ img, svg, video { max-width: 100%; display: block; }
 .prose .postbody__h2 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 3vw, 2.625rem); line-height: 1.12; letter-spacing: -0.012em; color: var(--ink-900); margin-bottom: 0.85rem; }
 .prose .postbody__h3 { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.6rem, 2.2vw, 2rem); line-height: 1.18; letter-spacing: -0.01em; color: var(--ink-900); margin-bottom: 0.75rem; }
 .prose .postbody__h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1.1rem; line-height: 1.4; letter-spacing: 0.01em; color: var(--ink-900); margin-bottom: 0.65rem; }
+.prose .postbody__h5 { font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem; line-height: 1.45; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-700); margin-bottom: 0.6rem; }
 
 /* CTA block */
 .ctablock { border-radius: var(--radius-xl); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }

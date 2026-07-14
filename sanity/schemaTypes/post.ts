@@ -37,9 +37,10 @@ export const post = defineType({
           type: "block",
           styles: [
             { title: "Normal", value: "normal" },
-            { title: "Heading Large", value: "h2" },
-            { title: "Heading Medium", value: "h3" },
-            { title: "Heading Small", value: "h4" },
+            { title: "H2 - Heading Large", value: "h2" },
+            { title: "H3 - Heading Medium", value: "h3" },
+            { title: "H4 - Heading Small", value: "h4" },
+            { title: "H5 - Heading Tiny", value: "h5" },
             { title: "Quote", value: "blockquote" },
           ],
         },

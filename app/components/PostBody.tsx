@@ -19,6 +19,11 @@ const components: PortableTextComponents = {
         {children}
       </h4>
     ),
+    h5: ({ children }) => (
+      <h5 className="postbody__h5" style={{ marginTop: "1.25rem" }}>
+        {children}
+      </h5>
+    ),
     blockquote: ({ children }) => (
       <blockquote
         style={{
