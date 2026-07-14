@@ -33,7 +33,16 @@ export const post = defineType({
       title: "Body",
       type: "array",
       of: [
-        { type: "block", styles: [{ title: "Normal", value: "normal" }, { title: "Heading", value: "h3" }, { title: "Quote", value: "blockquote" }] },
+        {
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Heading Large", value: "h2" },
+            { title: "Heading Medium", value: "h3" },
+            { title: "Heading Small", value: "h4" },
+            { title: "Quote", value: "blockquote" },
+          ],
+        },
         { type: "image", options: { hotspot: true } },
       ],
     }),

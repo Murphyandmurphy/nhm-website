@@ -4,7 +4,21 @@ import { urlFor } from "@/sanity/lib/image";
 
 const components: PortableTextComponents = {
   block: {
-    h3: ({ children }) => <h3 className="shead__title" style={{ marginTop: "1.5rem" }}>{children}</h3>,
+    h2: ({ children }) => (
+      <h2 className="postbody__h2" style={{ marginTop: "2.25rem" }}>
+        {children}
+      </h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="postbody__h3" style={{ marginTop: "1.75rem" }}>
+        {children}
+      </h3>
+    ),
+    h4: ({ children }) => (
+      <h4 className="postbody__h4" style={{ marginTop: "1.5rem" }}>
+        {children}
+      </h4>
+    ),
     blockquote: ({ children }) => (
       <blockquote
         style={{

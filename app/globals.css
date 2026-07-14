@@ -20,7 +20,7 @@
   --blue-500:#0083cb;--blue-600:#006da8;--blue-700:#015785;--blue-800:#0a4566;--blue-900:#0d384f;
 
   /* Warm cream / paper */
-  --cream-50:#fbf7f2;--cream-100:#f8f1ea;--cream-200:#f3e9e0;--cream-300:#ebdccf;--cream-400:#e0ccb9;--cream-500:#d2b9a0;
+  --cream-50:#fbf7f2;--cream-100:#f8f1ea;--cream-200:#f8f1ea;--cream-300:#ebdccf;--cream-400:#e0ccb9;--cream-500:#d2b9a0;
 
   /* Warm neutrals / ink */
   --white:#ffffff;--ink-900:#1f1a17;--ink-700:#3d352f;--ink-500:#6f655c;--ink-400:#8c8278;--ink-300:#b4a99d;
@@ -251,6 +251,9 @@ img, svg, video { max-width: 100%; display: block; }
 /* Prose */
 .prose p { font-size: var(--text-lg); line-height: 1.7; color: var(--ink-700); margin: 0 0 1.25rem; }
 .prose p:last-child { margin-bottom: 0; }
+.prose .postbody__h2 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 3vw, 2.625rem); line-height: 1.12; letter-spacing: -0.012em; color: var(--ink-900); margin-bottom: 0.85rem; }
+.prose .postbody__h3 { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.6rem, 2.2vw, 2rem); line-height: 1.18; letter-spacing: -0.01em; color: var(--ink-900); margin-bottom: 0.75rem; }
+.prose .postbody__h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1.1rem; line-height: 1.4; letter-spacing: 0.01em; color: var(--ink-900); margin-bottom: 0.65rem; }
 
 /* CTA block */
 .ctablock { border-radius: var(--radius-xl); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }
