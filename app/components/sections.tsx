@@ -256,7 +256,7 @@ function TestimonialsBlock({ b }: { b: Block }) {
       <Reveal>
         <div className="shead">
           {b.eyebrow ? (
-            <span className="nhm-badge nhm-badge--eyebrow" style={{ color: dark ? "var(--cream-100)" : "var(--blue-600)" }}>
+            <span className="nhm-badge nhm-badge--eyebrow" style={{ color: "var(--cream-100)" }}>
               {b.eyebrow}
             </span>
           ) : null}
