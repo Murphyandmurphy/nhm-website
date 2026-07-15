@@ -254,7 +254,14 @@ function TestimonialsBlock({ b }: { b: Block }) {
   return (
     <Section tone={(b.tone as Tone) || "blue"} style={sectionStyle(b)}>
       <Reveal>
-        <Heading eyebrow={b.eyebrow} title={b.title} />
+        <div className="shead">
+          {b.eyebrow ? (
+            <span className="nhm-badge nhm-badge--eyebrow" style={{ color: dark ? "var(--cream-100)" : "var(--blue-600)" }}>
+              {b.eyebrow}
+            </span>
+          ) : null}
+          {b.title ? <h2 className="shead__title">{parseInline(b.title)}</h2> : null}
+        </div>
       </Reveal>
       <TestimonialCarousel items={items} tone={dark ? "onblue" : "default"} />
     </Section>
