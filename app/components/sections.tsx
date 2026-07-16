@@ -207,10 +207,10 @@ function ServiceDetailBlock({ b, anchorId, first }: { b: Block; anchorId: string
   );
 }
 
-function ServiceCardsBlock({ b }: { b: Block }) {
+function ServiceCardsBlock({ b, flushBottom }: { b: Block; flushBottom?: boolean }) {
   const cards: CardData[] = b.cards || [];
   return (
-    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
+    <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b, flushBottom ? { paddingBottom: 0 } : undefined)}>
       <Reveal>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
       </Reveal>
@@ -248,11 +248,11 @@ function FeatureGridBlock({ b }: { b: Block }) {
   );
 }
 
-function TestimonialsBlock({ b }: { b: Block }) {
+function TestimonialsBlock({ b, flushTop }: { b: Block; flushTop?: boolean }) {
   const items: TestimonialItem[] = (b.quotes || []).map((q: TestimonialItem) => ({ quote: q.quote, name: q.name, role: q.role }));
   const dark = b.tone === "blue" || b.tone === "ink";
   return (
-    <Section tone={(b.tone as Tone) || "blue"} style={sectionStyle(b)}>
+    <Section tone={(b.tone as Tone) || "blue"} style={sectionStyle(b, flushTop ? { paddingTop: 0 } : undefined)}>
       <Reveal>
         <div className="shead">
           {b.eyebrow ? (
@@ -411,6 +411,8 @@ export function Sections({ sections }: { sections?: Block[] }) {
     <>
       {sections.map((b, i) => {
         const key = b._key || i;
+        const prevType = i > 0 ? sections[i - 1]?._type : undefined;
+        const nextType = i < sections.length - 1 ? sections[i + 1]?._type : undefined;
         switch (b._type) {
           case "heroSection": return <HeroBlock key={key} b={b} />;
           case "servicesHeroSection": return <ServicesHeroBlock key={key} b={b} navItems={navItems} />;
@@ -420,9 +422,9 @@ export function Sections({ sections }: { sections?: Block[] }) {
             return <ServiceDetailBlock key={key} b={b} anchorId={anchorId} first={isFirst} />;
           }
           case "imageTextSection": return <ImageTextBlock key={key} b={b} />;
-          case "serviceCardsSection": return <ServiceCardsBlock key={key} b={b} />;
+          case "serviceCardsSection": return <ServiceCardsBlock key={key} b={b} flushBottom={nextType === "testimonialsSection"} />;
           case "featureGridSection": return <FeatureGridBlock key={key} b={b} />;
-          case "testimonialsSection": return <TestimonialsBlock key={key} b={b} />;
+          case "testimonialsSection": return <TestimonialsBlock key={key} b={b} flushTop={prevType === "serviceCardsSection"} />;
           case "statsSection": return <StatsBlock key={key} b={b} />;
           case "logoStripSection": return <LogoStripBlock key={key} b={b} />;
           case "ctaSection": return <CtaBlock key={key} b={b} />;
