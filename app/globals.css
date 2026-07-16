@@ -208,6 +208,7 @@ img, svg, video { max-width: 100%; display: block; }
 .nav { position: sticky; top: 0; z-index: var(--z-sticky); background: color-mix(in srgb, var(--cream-200) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color var(--dur-base) var(--ease-out), background var(--dur-base); }
 .nav--scrolled { border-bottom-color: var(--line-200); background: color-mix(in srgb, var(--cream-200) 94%, transparent); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 78px; }
+.nav__brand { display: flex; align-self: flex-start; margin: 0; padding: 0; line-height: 0; }
 .nav__logo { height: 56px; width: auto; aspect-ratio: 817.29 / 585.46; display: block; }
 .nav__links { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
 .nav__link { font-family: var(--font-sans); font-weight: 500; font-size: 0.95rem; color: var(--ink-700); background: none; border: none; cursor: pointer; padding: 6px 0; position: relative; transition: color var(--dur-fast) var(--ease-out); }

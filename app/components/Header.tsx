@@ -50,7 +50,7 @@ export function Header({ settings }: { settings?: Settings }) {
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`.trim()}>
       <Container>
         <div className="nav__inner">
-          <Link href="/" aria-label="Home" style={{ display: "flex" }}>
+          <Link href="/" aria-label="Home" className="nav__brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo/nhm-logo-blue.svg" className="nav__logo" alt="Nadia Henrique-Murray" />
           </Link>
