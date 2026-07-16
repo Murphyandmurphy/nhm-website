@@ -209,7 +209,7 @@ img, svg, video { max-width: 100%; display: block; }
 .nav--scrolled { border-bottom-color: var(--line-200); background: color-mix(in srgb, var(--cream-200) 94%, transparent); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 78px; }
 .nav__brand { display: flex; align-self: flex-start; margin: 0; padding: 0; line-height: 0; }
-.nav__logo { height: 64px; width: auto; aspect-ratio: 817.29 / 585.46; display: block; }
+.nav__logo { height: 68px; width: auto; aspect-ratio: 817.29 / 585.46; display: block; }
 .nav__links { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
 .nav__link { font-family: var(--font-sans); font-weight: 500; font-size: 0.95rem; color: var(--ink-700); background: none; border: none; cursor: pointer; padding: 6px 0; position: relative; transition: color var(--dur-fast) var(--ease-out); }
 .nav__link:hover { color: var(--ink-900); }
