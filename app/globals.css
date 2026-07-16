@@ -334,6 +334,7 @@ img, svg, video { max-width: 100%; display: block; }
   .logostrip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer__grid { grid-template-columns: 1fr; }
   .nav__links { display: none; }
+  .nav__cta { display: none; }
   .nav__burger { display: flex; }
   .formgrid { grid-template-columns: 1fr; }
   .svc__num { font-size: 3rem; }
