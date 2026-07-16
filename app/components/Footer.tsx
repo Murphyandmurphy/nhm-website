@@ -71,10 +71,10 @@ export function Footer({ settings }: { settings?: Settings }) {
           <span>© {new Date().getFullYear()} Nadia Henrique-Murray · {brand}</span>
           <span>
             <a href="/privacy-policy" style={{ color: "var(--ink-300)", marginRight: "1.25rem" }}>
-              Privacy
+              Privacy &amp; Cookie Policy
             </a>
-            <a href="/privacy-policy#cookies" style={{ color: "var(--ink-300)" }}>
-              Cookies
+            <a href="/terms-of-business" style={{ color: "var(--ink-300)" }}>
+              Terms of business
             </a>
           </span>
         </div>
