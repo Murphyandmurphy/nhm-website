@@ -19,9 +19,9 @@ export const post = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Free resources", value: "Free resources" },
-          { title: "Client news", value: "Client news" },
-          { title: "Food & drink sector", value: "Food & drink sector" },
+          { title: "Strategy advice", value: "Strategy advice" },
+          { title: "Work in practice", value: "Work in practice" },
+          { title: "What's happening in food and drinks", value: "What's happening in food and drinks" },
         ],
       },
     }),
