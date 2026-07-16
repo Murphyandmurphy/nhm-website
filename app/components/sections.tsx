@@ -155,9 +155,12 @@ function ServicesHeroBlock({ b, navItems }: { b: Block; navItems: { id: string; 
   );
 }
 
-function ServiceDetailBlock({ b, anchorId, first }: { b: Block; anchorId: string; first?: boolean }) {
+function ServiceDetailBlock({ b, anchorId, first, flushBottom }: { b: Block; anchorId: string; first?: boolean; flushBottom?: boolean }) {
+  const baseStyle: React.CSSProperties = {};
+  if (first) baseStyle.paddingTop = 0;
+  if (flushBottom) baseStyle.paddingBottom = 0;
   return (
-    <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b, first ? { paddingTop: 0 } : undefined)}>
+    <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b, Object.keys(baseStyle).length ? baseStyle : undefined)}>
       <div className="svc" id={"svc-" + anchorId}>
         <Reveal>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -209,6 +212,8 @@ function ServiceDetailBlock({ b, anchorId, first }: { b: Block; anchorId: string
 
 function ServiceCardsBlock({ b, flushBottom }: { b: Block; flushBottom?: boolean }) {
   const cards: CardData[] = b.cards || [];
+  const hasHeading = Boolean(b.eyebrow || b.title || b.lead);
+  if (!cards.length && !hasHeading) return null;
   return (
     <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b, flushBottom ? { paddingBottom: 0 } : undefined)}>
       <Reveal>
@@ -250,6 +255,8 @@ function FeatureGridBlock({ b }: { b: Block }) {
 
 function TestimonialsBlock({ b, flushTop }: { b: Block; flushTop?: boolean }) {
   const items: TestimonialItem[] = (b.quotes || []).map((q: TestimonialItem) => ({ quote: q.quote, name: q.name, role: q.role }));
+  const hasHeader = Boolean(b.eyebrow || b.title);
+  if (!items.length && !hasHeader) return null;
   const dark = b.tone === "blue" || b.tone === "ink";
   return (
     <Section tone={(b.tone as Tone) || "blue"} style={sectionStyle(b, flushTop ? { paddingTop: 0 } : undefined)}>
@@ -419,12 +426,12 @@ export function Sections({ sections }: { sections?: Block[] }) {
           case "serviceDetailSection": {
             const anchorId = b._key || String(i);
             const isFirst = anchorId === firstDetailKey;
-            return <ServiceDetailBlock key={key} b={b} anchorId={anchorId} first={isFirst} />;
+            return <ServiceDetailBlock key={key} b={b} anchorId={anchorId} first={isFirst} flushBottom={nextType === "testimonialsSection"} />;
           }
           case "imageTextSection": return <ImageTextBlock key={key} b={b} />;
           case "serviceCardsSection": return <ServiceCardsBlock key={key} b={b} flushBottom={nextType === "testimonialsSection"} />;
           case "featureGridSection": return <FeatureGridBlock key={key} b={b} />;
-          case "testimonialsSection": return <TestimonialsBlock key={key} b={b} flushTop={prevType === "serviceCardsSection"} />;
+          case "testimonialsSection": return <TestimonialsBlock key={key} b={b} flushTop={prevType === "serviceCardsSection" || prevType === "serviceDetailSection"} />;
           case "statsSection": return <StatsBlock key={key} b={b} />;
           case "logoStripSection": return <LogoStripBlock key={key} b={b} />;
           case "ctaSection": return <CtaBlock key={key} b={b} />;
