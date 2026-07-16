@@ -260,16 +260,18 @@ function TestimonialsBlock({ b, flushTop }: { b: Block; flushTop?: boolean }) {
   const dark = b.tone === "blue" || b.tone === "ink";
   return (
     <Section tone={(b.tone as Tone) || "blue"} style={sectionStyle(b, flushTop ? { paddingTop: 0 } : undefined)}>
-      <Reveal>
-        <div className="shead">
-          {b.eyebrow ? (
-            <span className="nhm-badge nhm-badge--eyebrow" style={{ color: "var(--cream-100)" }}>
-              {b.eyebrow}
-            </span>
-          ) : null}
-          {b.title ? <h2 className="shead__title">{parseInline(b.title)}</h2> : null}
-        </div>
-      </Reveal>
+      {hasHeader ? (
+        <Reveal>
+          <div className="shead">
+            {b.eyebrow ? (
+              <span className="nhm-badge nhm-badge--eyebrow" style={{ color: "var(--cream-100)" }}>
+                {b.eyebrow}
+              </span>
+            ) : null}
+            {b.title ? <h2 className="shead__title">{parseInline(b.title)}</h2> : null}
+          </div>
+        </Reveal>
+      ) : null}
       <TestimonialCarousel items={items} tone={dark ? "onblue" : "default"} />
     </Section>
   );
@@ -323,6 +325,8 @@ function CtaBlock({ b }: { b: Block }) {
 }
 
 function TextBlock({ b }: { b: Block }) {
+  const hasBody = Array.isArray(b.body) ? b.body.length > 0 : Boolean(b.body);
+  if (!b.eyebrow && !b.heading && !hasBody) return null;
   const body = (
     <Reveal>
       {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
