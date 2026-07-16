@@ -70,10 +70,10 @@ export function Footer({ settings }: { settings?: Settings }) {
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} Nadia Henrique-Murray · {brand}</span>
           <span>
-            <a href="#" style={{ color: "var(--ink-300)", marginRight: "1.25rem" }}>
+            <a href="/privacy-policy" style={{ color: "var(--ink-300)", marginRight: "1.25rem" }}>
               Privacy
             </a>
-            <a href="#" style={{ color: "var(--ink-300)" }}>
+            <a href="/privacy-policy#cookies" style={{ color: "var(--ink-300)" }}>
               Cookies
             </a>
           </span>
