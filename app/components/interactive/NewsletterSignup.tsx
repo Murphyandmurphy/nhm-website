@@ -53,8 +53,8 @@ export function NewsletterSignup() {
 
   return (
     <div className="newsletter">
-      <p className="footer__h">Newsletter</p>
-      <p className="newsletter__copy">Monthly strategic marketing notes, practical growth ideas, and fresh insights for food and drink brands.</p>
+      <p className="footer__h">Stay in the loop</p>
+      <p className="newsletter__copy">I&apos;ll send you strategic advice, real project examples, what&apos;s caught my eye in food, drink and hospitality, or anything else worth sharing. No fixed schedule.</p>
       <form className="newsletter__form" onSubmit={handleSubmit} noValidate>
         <Input
           aria-label="Email address"
