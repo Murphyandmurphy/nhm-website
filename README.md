@@ -1,5 +1,18 @@
 # Nadia Henrique-Murray / Appétit — Website
 
+## MailerLite newsletter signup
+
+The footer newsletter form posts to `/api/newsletter`, which proxies the request to MailerLite so the API key stays server-side.
+
+Add these environment variables before testing the signup:
+
+```bash
+MAILERLITE_API_KEY=your_mailerlite_api_key
+MAILERLITE_GROUP_ID=your_mailerlite_group_id
+```
+
+The MailerLite group ID should be the audience/group you want new subscribers added to.
+
 Marketing site for Nadia Henrique-Murray (brand "Appétit"), fully editable via **Sanity CMS**.
 
 **Stack:** Next.js 15 (App Router) · TypeScript · Tailwind CSS · Framer Motion ·

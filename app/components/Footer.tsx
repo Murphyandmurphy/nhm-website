@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./layout/Container";
+import { NewsletterSignup } from "./interactive/NewsletterSignup";
 
 type NavLink = { label: string; href: string };
 type Settings = {
@@ -66,6 +66,7 @@ export function Footer({ settings }: { settings?: Settings }) {
               </li>
             </ul>
           </div>
+          <NewsletterSignup />
         </div>
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} Nadia Henrique-Murray · {brand}</span>
