@@ -5,11 +5,12 @@ import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 
 type Status = "idle" | "loading" | "success" | "error";
+type NewsletterSignupMode = "footer" | "cta";
 
 const SUCCESS_MESSAGE = "You’re subscribed. Watch your inbox for the next update.";
 const DEFAULT_ERROR = "Something went wrong. Please try again in a moment.";
 
-export function NewsletterSignup() {
+export function NewsletterSignup({ mode = "footer" }: { mode?: NewsletterSignupMode }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -52,8 +53,8 @@ export function NewsletterSignup() {
   };
 
   return (
-    <div className="newsletter">
-      <p className="footer__h">Stay in the loop</p>
+    <div className={`newsletter ${mode === "cta" ? "newsletter--cta" : ""}`.trim()}>
+      {mode === "cta" ? <h3 className="newsletter__title">Stay in the loop</h3> : <p className="footer__h">Stay in the loop</p>}
       <p className="newsletter__copy">I&apos;ll send you strategic advice, real project examples, what&apos;s caught my eye in food, drink and hospitality, or anything else worth sharing. No fixed schedule.</p>
       <form className="newsletter__form" onSubmit={handleSubmit} noValidate>
         <Input

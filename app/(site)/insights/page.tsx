@@ -67,6 +67,29 @@ export default async function InsightsPage() {
           ) : null}
         </Reveal>
 
+        {/* Content strands (intro cards) */}
+        {strands.length ? (
+          <div className="grid-3" style={{ marginTop: "3rem" }}>
+            {strands.map((s, idx) => (
+              <Reveal key={s.title || idx} delay={idx * 0.08}>
+                <div className="insightcard insightcard--plain">
+                  <div className="insightcard__icon">
+                    <Icon name={s.icon || "Lightbulb"} size={26} stroke={1.6} />
+                  </div>
+                  <h3 className="insightcard__title">{s.title}</h3>
+                  <p className="insightcard__body">{s.body}</p>
+                  {!posts.length ? (
+                    <span className="insightcard__soon">
+                      <Icon name="Clock" size={15} />
+                      Coming soon
+                    </span>
+                  ) : null}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        ) : null}
+
         {/* Published posts */}
         {posts.length ? (
           <div className="grid-3" style={{ marginTop: "3rem" }}>
@@ -94,29 +117,6 @@ export default async function InsightsPage() {
             ))}
           </div>
         ) : null}
-
-        {/* Content strands (intro cards) */}
-        {strands.length ? (
-          <div className="grid-3" style={{ marginTop: "3rem" }}>
-            {strands.map((s, idx) => (
-              <Reveal key={s.title || idx} delay={idx * 0.08}>
-                <div className="insightcard">
-                  <div className="insightcard__icon">
-                    <Icon name={s.icon || "Lightbulb"} size={26} stroke={1.6} />
-                  </div>
-                  <h3 className="insightcard__title">{s.title}</h3>
-                  <p className="insightcard__body">{s.body}</p>
-                  {!posts.length ? (
-                    <span className="insightcard__soon">
-                      <Icon name="Clock" size={15} />
-                      Coming soon
-                    </span>
-                  ) : null}
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        ) : null}
       </Section>
 
       {page.ctaTitle ? (
@@ -130,7 +130,7 @@ export default async function InsightsPage() {
               href="/contact"
               hideButton={shouldShowNewsletter}
             >
-              {shouldShowNewsletter ? <NewsletterSignup /> : null}
+              {shouldShowNewsletter ? <NewsletterSignup mode="cta" /> : null}
             </CTABlock>
           </Reveal>
         </Section>
