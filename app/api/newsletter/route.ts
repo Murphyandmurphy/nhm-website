@@ -22,7 +22,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const groupId = Number(groupIdDigits);
+  // MailerLite group IDs can exceed JS safe integer range, so keep as digit string.
+  const groupId = groupIdDigits;
 
   const body = (await request.json().catch(() => null)) as { email?: unknown } | null;
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
