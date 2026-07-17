@@ -130,7 +130,7 @@ export default async function InsightsPage({
                 const href = opt.value === "all" ? "/insights" : `/insights?category=${opt.value}`;
                 const active = activeFilter === opt.value;
                 return (
-                  <Link key={opt.value} href={href} className={`insights-filter__chip ${active ? "is-active" : ""}`.trim()}>
+                  <Link key={opt.value} href={href} scroll={false} className={`insights-filter__chip ${active ? "is-active" : ""}`.trim()}>
                     {opt.label}
                   </Link>
                 );
