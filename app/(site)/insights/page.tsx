@@ -37,6 +37,27 @@ type Data = {
   posts: Post[];
 };
 
+const FILTER_OPTIONS = [
+  { value: "all", label: "All posts", categories: [] as string[] },
+  { value: "strategy-advice", label: "Strategy advice", categories: ["strategy advice"] },
+  { value: "work-in-practice", label: "Work in practice", categories: ["work in practice"] },
+  {
+    value: "food-and-drink",
+    label: "What's happening in food & drink",
+    categories: ["what's happening in food & drink", "whats happening in food & drink"],
+  },
+] as const;
+
+function normalize(value?: string) {
+  return (value || "").trim().toLowerCase();
+}
+
+function mapCategoryToFilterValue(category?: string) {
+  const normalizedCategory = normalize(category);
+  const match = FILTER_OPTIONS.find((opt) => opt.value !== "all" && opt.categories.some((candidate) => normalize(candidate) === normalizedCategory));
+  return match?.value || null;
+}
+
 function formatDate(d?: string) {
   if (!d) return "";
   try {
@@ -46,13 +67,24 @@ function formatDate(d?: string) {
   }
 }
 
-export default async function InsightsPage() {
+export default async function InsightsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ category?: string }>;
+}) {
+  const params = searchParams ? await searchParams : undefined;
   const data = await sanityFetch<Data>(insightsPageQuery);
   const page: InsightsDoc = data?.page || {};
   const posts = data?.posts || [];
   const strands = page.strands || [];
   const registerLine = "Register here. I will only email sporadically when there is something new to read on this page.";
   const shouldShowNewsletter = (page.ctaBody || "").trim() === registerLine;
+  const requestedFilter = normalize(params?.category) || "all";
+  const activeFilter = FILTER_OPTIONS.some((opt) => opt.value === requestedFilter) ? requestedFilter : "all";
+  const visiblePosts =
+    activeFilter === "all"
+      ? posts
+      : posts.filter((post) => mapCategoryToFilterValue(post.category) === activeFilter);
 
   return (
     <>
@@ -73,7 +105,7 @@ export default async function InsightsPage() {
             {strands.map((s, idx) => (
               <Reveal key={s.title || idx} delay={idx * 0.08}>
                 <div className="insightcard insightcard--plain">
-                  <div className="insightcard__icon">
+                  <div className="insightcard__icon insightcard__icon--cream">
                     <Icon name={s.icon || "Lightbulb"} size={26} stroke={1.6} />
                   </div>
                   <h3 className="insightcard__title">{s.title}</h3>
@@ -92,30 +124,47 @@ export default async function InsightsPage() {
 
         {/* Published posts */}
         {posts.length ? (
-          <div className="grid-3" style={{ marginTop: "3rem" }}>
-            {posts.map((p, idx) => (
-              <Reveal key={p.slug || idx} delay={(idx % 3) * 0.08}>
-                <Link href={`/insights/${p.slug}`} className="insightcard" style={{ textDecoration: "none" }}>
-                  <SanityImage
-                    image={p.coverImage}
-                    alt={p.title || ""}
-                    fallback={{ label: p.category || "Insight", icon: "Newspaper", tone: "cream" }}
-                    style={{ aspectRatio: "16 / 10", borderRadius: "var(--radius-md)" }}
-                  />
-                  {p.category ? (
-                    <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.74rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--blue-600)" }}>
-                      {p.category}
-                    </span>
-                  ) : null}
-                  <h3 className="insightcard__title">{p.title}</h3>
-                  {p.excerpt ? <p className="insightcard__body">{p.excerpt}</p> : null}
-                  <span className="insightcard__soon" style={{ color: "var(--ink-400)" }}>
-                    {formatDate(p.date)}
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+          <>
+            <div className="insights-filter" style={{ marginTop: "3rem" }}>
+              {FILTER_OPTIONS.map((opt) => {
+                const href = opt.value === "all" ? "/insights" : `/insights?category=${opt.value}`;
+                const active = activeFilter === opt.value;
+                return (
+                  <Link key={opt.value} href={href} className={`insights-filter__chip ${active ? "is-active" : ""}`.trim()}>
+                    {opt.label}
+                  </Link>
+                );
+              })}
+            </div>
+            {visiblePosts.length ? (
+              <div className="grid-3" style={{ marginTop: "1.5rem" }}>
+                {visiblePosts.map((p, idx) => (
+                  <Reveal key={p.slug || idx} delay={(idx % 3) * 0.08}>
+                    <Link href={`/insights/${p.slug}`} className="insightcard" style={{ textDecoration: "none" }}>
+                      <SanityImage
+                        image={p.coverImage}
+                        alt={p.title || ""}
+                        fallback={{ label: p.category || "Insight", icon: "Newspaper", tone: "cream" }}
+                        style={{ aspectRatio: "16 / 10", borderRadius: "var(--radius-md)" }}
+                      />
+                      {p.category ? (
+                        <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.74rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--blue-600)" }}>
+                          {p.category}
+                        </span>
+                      ) : null}
+                      <h3 className="insightcard__title">{p.title}</h3>
+                      {p.excerpt ? <p className="insightcard__body">{p.excerpt}</p> : null}
+                      <span className="insightcard__soon" style={{ color: "var(--ink-400)" }}>
+                        {formatDate(p.date)}
+                      </span>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            ) : (
+              <p style={{ marginTop: "1.5rem", color: "var(--ink-500)" }}>No posts in this category yet.</p>
+            )}
+          </>
         ) : null}
       </Section>
 

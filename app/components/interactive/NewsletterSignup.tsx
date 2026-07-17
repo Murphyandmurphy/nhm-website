@@ -68,7 +68,7 @@ export function NewsletterSignup({ mode = "footer" }: { mode?: NewsletterSignupM
           type="email"
           value={email}
         />
-        <Button size="sm" type="submit" variant="onblue" disabled={status === "loading"}>
+        <Button size={mode === "cta" ? "lg" : "sm"} type="submit" variant="onblue" disabled={status === "loading"}>
           {status === "loading" ? "Joining..." : "Join"}
         </Button>
       </form>
