@@ -4,6 +4,7 @@ import { Icon } from "@/app/components/ui/Icon";
 import type { IconName } from "@/app/components/ui/Icon";
 import { Section } from "@/app/components/layout/Section";
 import { CTABlock } from "@/app/components/layout/CTABlock";
+import { NewsletterSignup } from "@/app/components/interactive/NewsletterSignup";
 import { Reveal } from "@/app/components/Reveal";
 import { RichHeading } from "@/app/components/rich";
 import { SanityImage } from "@/app/components/SanityImage";
@@ -50,6 +51,8 @@ export default async function InsightsPage() {
   const page: InsightsDoc = data?.page || {};
   const posts = data?.posts || [];
   const strands = page.strands || [];
+  const registerLine = "Register here. I will only email sporadically when there is something new to read on this page.";
+  const shouldShowNewsletter = (page.ctaBody || "").trim() === registerLine;
 
   return (
     <>
@@ -119,7 +122,16 @@ export default async function InsightsPage() {
       {page.ctaTitle ? (
         <Section tone="white">
           <Reveal>
-            <CTABlock tone={page.ctaTone || "ink"} title={page.ctaTitle} body={page.ctaBody} ctaLabel={page.ctaLabel} href="/contact" />
+            <CTABlock
+              tone={page.ctaTone || "ink"}
+              title={page.ctaTitle}
+              body={shouldShowNewsletter ? undefined : page.ctaBody}
+              ctaLabel={page.ctaLabel}
+              href="/contact"
+              hideButton={shouldShowNewsletter}
+            >
+              {shouldShowNewsletter ? <NewsletterSignup /> : null}
+            </CTABlock>
           </Reveal>
         </Section>
       ) : null}

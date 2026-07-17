@@ -5,14 +5,24 @@ const MAILERLITE_API_URL = "https://connect.mailerlite.com/api/subscribers";
 
 export async function POST(request: Request) {
   const apiKey = process.env.MAILERLITE_API_KEY;
-  const groupId = process.env.MAILERLITE_GROUP_ID;
+  const groupIdRaw = process.env.MAILERLITE_GROUP_ID;
 
-  if (!apiKey || !groupId) {
+  if (!apiKey || !groupIdRaw) {
     return NextResponse.json(
       { message: "Newsletter signup is not configured yet." },
       { status: 500 },
     );
   }
+
+  const groupIdDigits = groupIdRaw.replace(/\D+/g, "");
+  if (!groupIdDigits) {
+    return NextResponse.json(
+      { message: "Newsletter signup is misconfigured: group id must be numeric." },
+      { status: 500 },
+    );
+  }
+
+  const groupId = Number(groupIdDigits);
 
   const body = (await request.json().catch(() => null)) as { email?: unknown } | null;
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
@@ -44,10 +54,14 @@ export async function POST(request: Request) {
     | null;
 
   if (!response.ok) {
-    const apiError = Array.isArray(payload?.errors?.email)
-      ? payload?.errors?.email[0]
-      : typeof payload?.errors?.email === "string"
-        ? payload.errors.email
+    const firstError = payload?.errors
+      ? Object.values(payload.errors)[0]
+      : undefined;
+
+    const apiError = Array.isArray(firstError)
+      ? firstError[0]
+      : typeof firstError === "string"
+        ? firstError
         : payload?.message;
 
     return NextResponse.json(
