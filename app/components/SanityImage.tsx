@@ -17,14 +17,13 @@ type SanityImageProps = {
   alt?: string;
   fallback: Fallback;
   style?: React.CSSProperties;
-  imageStyle?: React.CSSProperties;
 };
 
 /**
  * SanityImage — renders a Sanity image when one is set, otherwise falls back
  * to the styled <ImagePlaceholder> so the layout is never empty.
  */
-export function SanityImage({ image, alt, fallback, style, imageStyle }: SanityImageProps) {
+export function SanityImage({ image, alt, fallback, style }: SanityImageProps) {
   if (!image?.asset?._ref) {
     return <ImagePlaceholder {...fallback} style={style} />;
   }
@@ -46,7 +45,7 @@ export function SanityImage({ image, alt, fallback, style, imageStyle }: SanityI
         src={src}
         alt={alt || ""}
         fill
-        style={{ objectFit: "cover", ...imageStyle }}
+        style={{ objectFit: "cover" }}
         sizes="(max-width: 900px) 100vw, 50vw"
       />
     </div>
