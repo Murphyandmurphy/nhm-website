@@ -231,7 +231,7 @@ img, svg, video { max-width: 100%; display: block; }
 .hero__ticker-viewport { overflow: hidden; width: 100%; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
 .hero__ticker-track { display: flex; align-items: center; gap: 2.5rem; width: max-content; animation: hero-logo-marquee 60s linear infinite; }
 .hero__ticker-item { display: inline-flex; align-items: center; justify-content: center; min-width: 180px; }
-.hero__ticker-logo { height: 56px; width: auto; max-width: 192px; object-fit: contain; opacity: 0.94; }
+.hero__ticker-logo { height: 62px; width: auto; max-width: 212px; object-fit: contain; opacity: 0.94; }
 .hero__ticker-name { font-family: var(--font-display); font-weight: 300; font-size: 1rem; color: var(--ink-700); white-space: nowrap; }
 
 @keyframes hero-logo-marquee {
@@ -378,7 +378,7 @@ img, svg, video { max-width: 100%; display: block; }
   .svc__num { font-size: 3rem; }
   .hero__ticker-track { gap: 1.25rem; animation-duration: 52s; }
   .hero__ticker-item { min-width: 136px; }
-  .hero__ticker-logo { height: 48px; max-width: 164px; }
+  .hero__ticker-logo { height: 52px; max-width: 176px; }
 }
 @media (min-width: 901px) and (max-width: 1100px) {
   .logostrip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
