@@ -10,8 +10,6 @@ const logoBlendStyle = {
   mixBlendMode: "multiply" as const,
   filter: "grayscale(1)",
   backgroundColor: "transparent",
-  transform: "translateZ(0)",
-  backfaceVisibility: "hidden" as const,
 };
 
 function normalize(b: BrandItem): { name: string; logo?: SanityImageValue } {
@@ -34,7 +32,7 @@ export function LogoStrip({ brands }: LogoStripProps) {
           <div className="logochip" key={(b.name || "brand") + i}>
             {hasLogo ? (
               <img
-                src={urlFor(b.logo as never).height(120).fit("max").auto("format").url()}
+                src={urlFor(b.logo as never).height(320).dpr(2).fit("max").auto("format").url()}
                 alt={b.name || ""}
                 className="logochip__img"
                 style={logoBlendStyle}
