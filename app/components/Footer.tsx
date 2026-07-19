@@ -36,9 +36,6 @@ export function Footer({ settings }: { settings?: Settings }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo/nhm-logo-white.svg" className="footer__logo" alt="Nadia Henrique-Murray" />
             <p className="footer__tag">{tagline}</p>
-            <p className="footer__tag" style={{ marginTop: "1rem", color: "var(--blue-300)" }}>
-              {brand}
-            </p>
           </div>
           <div>
             <p className="footer__h">Explore</p>
