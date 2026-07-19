@@ -229,9 +229,9 @@ img, svg, video { max-width: 100%; display: block; }
 .hero__ticker { margin-top: clamp(1.75rem, 3vw, 2.75rem); }
 .hero__ticker-heading { font-family: var(--font-sans); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); margin: 0 0 0.9rem; }
 .hero__ticker-viewport { overflow: hidden; width: 100%; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
-.hero__ticker-track { display: flex; align-items: center; gap: 2.25rem; width: max-content; animation: hero-logo-marquee 72s linear infinite; }
-.hero__ticker-item { display: inline-flex; align-items: center; justify-content: center; min-width: 90px; }
-.hero__ticker-logo { height: 28px; width: auto; max-width: 96px; object-fit: contain; filter: grayscale(1); opacity: 0.88; }
+.hero__ticker-track { display: flex; align-items: center; gap: 2.5rem; width: max-content; animation: hero-logo-marquee 60s linear infinite; }
+.hero__ticker-item { display: inline-flex; align-items: center; justify-content: center; min-width: 180px; }
+.hero__ticker-logo { height: 56px; width: auto; max-width: 192px; object-fit: contain; opacity: 0.94; }
 .hero__ticker-name { font-family: var(--font-display); font-weight: 300; font-size: 1rem; color: var(--ink-700); white-space: nowrap; }
 
 @keyframes hero-logo-marquee {
@@ -376,8 +376,9 @@ img, svg, video { max-width: 100%; display: block; }
   .formgrid { grid-template-columns: 1fr; }
   .newsletter__form { grid-template-columns: 1fr; }
   .svc__num { font-size: 3rem; }
-  .hero__ticker-track { gap: 1.5rem; animation-duration: 62s; }
-  .hero__ticker-logo { height: 24px; max-width: 82px; }
+  .hero__ticker-track { gap: 1.25rem; animation-duration: 52s; }
+  .hero__ticker-item { min-width: 136px; }
+  .hero__ticker-logo { height: 48px; max-width: 164px; }
 }
 @media (min-width: 901px) and (max-width: 1100px) {
   .logostrip { grid-template-columns: repeat(4, minmax(0, 1fr)); }

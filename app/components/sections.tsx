@@ -108,7 +108,7 @@ function HeroBlock({ b }: { b: Block }) {
                   <div className="hero__ticker-item" key={`${brand.name || "brand"}-${i}`}>
                     {brand.logo?.asset?._ref ? (
                       <img
-                        src={urlFor(brand.logo as never).height(96).dpr(2).fit("max").auto("format").url()}
+                        src={urlFor(brand.logo as never).height(192).dpr(2).fit("max").auto("format").url()}
                         alt={brand.name || "Client logo"}
                         className="hero__ticker-logo"
                       />
