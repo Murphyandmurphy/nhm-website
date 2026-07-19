@@ -117,6 +117,7 @@ export default async function InsightsPage({
                       alt={s.title || ""}
                       fallback={{ label: s.title || "Insight", icon: s.icon || "Image", tone: "cream" }}
                       style={{ aspectRatio: "1 / 1", width: "clamp(132px, 16vw, 156px)", borderRadius: "var(--radius-md)" }}
+                      imageStyle={{ mixBlendMode: "multiply", filter: "grayscale(1)", backgroundColor: "transparent" }}
                     />
                   ) : s.mediaType === "none" ? null : (
                     <div className="insightcard__icon insightcard__icon--cream">
