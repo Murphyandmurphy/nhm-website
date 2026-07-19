@@ -17,6 +17,7 @@ import { AnchorNav } from "./interactive/AnchorNav";
 import { ContactForm } from "./interactive/ContactForm";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { contactPageQuery } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 import type { SanityImageValue } from "@/app/types";
 
 type Tone = "cream" | "white" | "paper" | "blue" | "ink";
@@ -60,6 +61,11 @@ function Heading({ eyebrow, title, lead }: { eyebrow?: string; title?: string; l
 }
 
 function HeroBlock({ b }: { b: Block }) {
+  const tickerHeading = b.logoTickerHeading as string | undefined;
+  const tickerBrands: { name?: string; logo?: SanityImageValue }[] = b.logoTickerBrands || [];
+  const hasTicker = tickerBrands.length > 0;
+  const loopBrands = [...tickerBrands, ...tickerBrands];
+
   return (
     <Section tone={(b.tone as Tone) || "cream"} className="hero" style={sectionStyle(b)}>
       <div className="hero__grid">
@@ -92,6 +98,30 @@ function HeroBlock({ b }: { b: Block }) {
           />
         </Reveal>
       </div>
+      {hasTicker ? (
+        <Reveal delay={0.08} y={0}>
+          <div className="hero__ticker">
+            {tickerHeading ? <p className="hero__ticker-heading">{tickerHeading}</p> : null}
+            <div className="hero__ticker-viewport">
+              <div className="hero__ticker-track" aria-hidden="true">
+                {loopBrands.map((brand, i) => (
+                  <div className="hero__ticker-item" key={`${brand.name || "brand"}-${i}`}>
+                    {brand.logo?.asset?._ref ? (
+                      <img
+                        src={urlFor(brand.logo as never).height(96).dpr(2).fit("max").auto("format").url()}
+                        alt={brand.name || "Client logo"}
+                        className="hero__ticker-logo"
+                      />
+                    ) : (
+                      <span className="hero__ticker-name">{brand.name || "Brand"}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      ) : null}
     </Section>
   );
 }

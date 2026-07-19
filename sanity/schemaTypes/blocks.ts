@@ -94,6 +94,24 @@ export const heroSection = defineType({
     defineField({ name: "secondaryLabel", title: "Secondary button label", type: "string" }),
     defineField({ name: "secondaryHref", title: "Secondary button link", type: "string" }),
     defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+    defineField({ name: "logoTickerHeading", title: "Logo ticker heading", type: "string", initialValue: "I've helped..." }),
+    defineField({
+      name: "logoTickerBrands",
+      title: "Logo ticker brands",
+      description: "Logos shown in the scrolling strip at the bottom of the hero.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "brand",
+          fields: [
+            defineField({ name: "name", title: "Brand name", type: "string" }),
+            defineField({ name: "logo", title: "Logo", type: "image" }),
+          ],
+          preview: { select: { title: "name", media: "logo" } },
+        }),
+      ],
+    }),
     toneField,
     ...sectionSpacingFields(),
   ],
