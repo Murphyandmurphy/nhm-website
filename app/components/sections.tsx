@@ -324,14 +324,14 @@ function StatsBlock({ b }: { b: Block }) {
   );
 }
 
-function LogoStripBlock({ b }: { b: Block }) {
+function LogoStripBlock({ b, logoRecolor = true }: { b: Block; logoRecolor?: boolean }) {
   const hasHeading = Boolean(b.eyebrow || b.title || b.lead);
   return (
     <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal y={0}>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
         <div style={hasHeading ? undefined : { marginTop: "clamp(1rem, 2vw, 1.5rem)" }}>
-          <LogoStrip brands={b.brands || []} />
+          <LogoStrip brands={b.brands || []} recolor={logoRecolor} />
         </div>
         {b.note ? (
           <p style={{ fontSize: "0.85rem", color: "var(--ink-400)", marginTop: "1.25rem", textAlign: "center" }}>{b.note}</p>
@@ -441,7 +441,7 @@ async function ContactBlock({ b }: { b: Block }) {
 }
 
 /** Sections — renders a stack of builder blocks in order. */
-export function Sections({ sections }: { sections?: Block[] }) {
+export function Sections({ sections, logoStripRecolor = true }: { sections?: Block[]; logoStripRecolor?: boolean }) {
   if (!sections || !sections.length) return null;
   // Build the "jump to" nav from any Service Detail blocks on the page.
   const details = sections.filter((b) => b._type === "serviceDetailSection");
@@ -470,7 +470,7 @@ export function Sections({ sections }: { sections?: Block[] }) {
           case "featureGridSection": return <FeatureGridBlock key={key} b={b} />;
           case "testimonialsSection": return <TestimonialsBlock key={key} b={b} flushTop={prevType === "serviceCardsSection" || prevType === "serviceDetailSection"} />;
           case "statsSection": return <StatsBlock key={key} b={b} />;
-          case "logoStripSection": return <LogoStripBlock key={key} b={b} />;
+          case "logoStripSection": return <LogoStripBlock key={key} b={b} logoRecolor={logoStripRecolor} />;
           case "ctaSection": return <CtaBlock key={key} b={b} />;
           case "textSection": return <TextBlock key={key} b={b} />;
           case "infoCardsSection": return <InfoCardsBlock key={key} b={b} />;

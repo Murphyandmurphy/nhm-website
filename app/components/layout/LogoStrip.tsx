@@ -4,7 +4,7 @@ import type { SanityImageValue } from "@/app/types";
 
 export type BrandItem = { name?: string; logo?: SanityImageValue } | string;
 
-type LogoStripProps = { brands: BrandItem[] };
+type LogoStripProps = { brands: BrandItem[]; recolor?: boolean };
 
 function normalize(b: BrandItem): { name: string; logo?: SanityImageValue } {
   if (typeof b === "string") return { name: b };
@@ -16,7 +16,7 @@ function normalize(b: BrandItem): { name: string; logo?: SanityImageValue } {
  * Each item shows its uploaded logo (greyscaled + softened), or falls back
  * to the brand name set in Larken if no logo image has been added yet.
  */
-export function LogoStrip({ brands }: LogoStripProps) {
+export function LogoStrip({ brands, recolor = true }: LogoStripProps) {
   return (
     <div className="logostrip">
       {brands.map((raw, i) => {
@@ -28,7 +28,7 @@ export function LogoStrip({ brands }: LogoStripProps) {
               <img
                 src={urlFor(b.logo as never).height(320).dpr(2).fit("max").auto("format").url()}
                 alt={b.name || ""}
-                className="logochip__img"
+                className={`logochip__img ${recolor ? "" : "logochip__img--natural"}`.trim()}
               />
             ) : (
               <span className="logochip__text">{b.name}</span>

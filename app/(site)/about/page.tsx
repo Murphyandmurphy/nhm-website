@@ -7,5 +7,5 @@ type Data = { sections?: any[] } | null;
 
 export default async function AboutPage() {
   const data = await sanityFetch<Data>(aboutPageQuery);
-  return <Sections sections={data?.sections} />;
+  return <Sections sections={data?.sections} logoStripRecolor={false} />;
 }

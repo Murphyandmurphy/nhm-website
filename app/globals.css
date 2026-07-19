@@ -278,6 +278,7 @@ img, svg, video { max-width: 100%; display: block; }
 .logostrip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.25rem 1rem; align-items: stretch; width: 100%; }
 .logochip { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; padding: 0.75rem; min-width: 0; }
 .logochip__img { max-height: 100%; max-width: 100%; width: 100%; height: 100%; object-fit: contain; filter: grayscale(1); opacity: 1; transition: opacity var(--dur-base) var(--ease-out); image-rendering: -webkit-optimize-contrast; }
+.logochip__img--natural { filter: none; }
 .logochip__img:hover { opacity: 0.9; }
 .logochip__text { font-family: var(--font-display); font-weight: 300; font-size: 1.35rem; color: var(--ink-700); letter-spacing: -0.01em; opacity: 0.7; }
 
