@@ -297,7 +297,7 @@ function StatsBlock({ b }: { b: Block }) {
 function LogoStripBlock({ b }: { b: Block }) {
   return (
     <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
-      <Reveal>
+      <Reveal y={0}>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
         <LogoStrip brands={b.brands || []} />
         {b.note ? (
