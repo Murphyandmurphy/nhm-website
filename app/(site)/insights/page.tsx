@@ -25,7 +25,13 @@ type InsightsDoc = {
   heroEyebrow?: string;
   heroTitle?: string;
   heroLead?: string;
-  strands?: { icon?: IconName; title?: string; body?: string }[];
+  strands?: {
+    mediaType?: "icon" | "image" | "none";
+    icon?: IconName;
+    image?: SanityImageValue;
+    title?: string;
+    body?: string;
+  }[];
   ctaTone?: "ink" | "blue";
   ctaTitle?: string;
   ctaBody?: string;
@@ -105,9 +111,18 @@ export default async function InsightsPage({
             {strands.map((s, idx) => (
               <Reveal key={s.title || idx} delay={idx * 0.08}>
                 <div className="insightcard insightcard--plain">
-                  <div className="insightcard__icon insightcard__icon--cream">
-                    <Icon name={s.icon || "Lightbulb"} size={26} stroke={1.6} />
-                  </div>
+                  {s.mediaType === "image" ? (
+                    <SanityImage
+                      image={s.image}
+                      alt={s.title || ""}
+                      fallback={{ label: s.title || "Insight", icon: s.icon || "Image", tone: "cream" }}
+                      style={{ aspectRatio: "1 / 1", width: "clamp(132px, 16vw, 156px)", borderRadius: "var(--radius-md)" }}
+                    />
+                  ) : s.mediaType === "none" ? null : (
+                    <div className="insightcard__icon insightcard__icon--cream">
+                      <Icon name={s.icon || "Lightbulb"} size={26} stroke={1.6} />
+                    </div>
+                  )}
                   <h3 className="insightcard__title">{s.title}</h3>
                   <p className="insightcard__body">{s.body}</p>
                   {!posts.length ? (
