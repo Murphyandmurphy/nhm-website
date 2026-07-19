@@ -259,7 +259,7 @@ img, svg, video { max-width: 100%; display: block; }
 
 /* CTA block */
 .ctablock { border-radius: var(--radius-xl); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }
-.ctablock__title { font-family: var(--font-display); font-weight: 300; font-size: var(--text-h2); line-height: 1.1; letter-spacing: -0.012em; margin: 0 0 1rem; }
+.ctablock__title { font-family: var(--font-display); font-weight: 300; font-size: var(--text-h2); line-height: 1.1; letter-spacing: -0.012em; margin: 0 0 1rem; color: inherit; }
 .ctablock__body { font-size: var(--text-lead); line-height: 1.6; margin: 0 auto 2rem; max-width: 48ch; }
 
 /* Logo strip */
