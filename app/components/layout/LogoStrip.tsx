@@ -6,6 +6,14 @@ export type BrandItem = { name?: string; logo?: SanityImageValue } | string;
 
 type LogoStripProps = { brands: BrandItem[] };
 
+const logoBlendStyle = {
+  mixBlendMode: "multiply" as const,
+  filter: "grayscale(1)",
+  backgroundColor: "transparent",
+  transform: "translateZ(0)",
+  backfaceVisibility: "hidden" as const,
+};
+
 function normalize(b: BrandItem): { name: string; logo?: SanityImageValue } {
   if (typeof b === "string") return { name: b };
   return { name: b.name || "", logo: b.logo };
@@ -29,6 +37,7 @@ export function LogoStrip({ brands }: LogoStripProps) {
                 src={urlFor(b.logo as never).height(120).fit("max").auto("format").url()}
                 alt={b.name || ""}
                 className="logochip__img"
+                style={logoBlendStyle}
               />
             ) : (
               <span className="logochip__text">{b.name}</span>
