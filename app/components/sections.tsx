@@ -295,11 +295,14 @@ function StatsBlock({ b }: { b: Block }) {
 }
 
 function LogoStripBlock({ b }: { b: Block }) {
+  const hasHeading = Boolean(b.eyebrow || b.title || b.lead);
   return (
     <Section tone={(b.tone as Tone) || "cream"} style={sectionStyle(b)}>
       <Reveal y={0}>
         <Heading eyebrow={b.eyebrow} title={b.title} lead={b.lead} />
-        <LogoStrip brands={b.brands || []} />
+        <div style={hasHeading ? undefined : { marginTop: "clamp(1rem, 2vw, 1.5rem)" }}>
+          <LogoStrip brands={b.brands || []} />
+        </div>
         {b.note ? (
           <p style={{ fontSize: "0.85rem", color: "var(--ink-400)", marginTop: "1.25rem", textAlign: "center" }}>{b.note}</p>
         ) : null}
