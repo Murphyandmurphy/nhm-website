@@ -188,7 +188,7 @@ function ImageTextBlock({ b }: { b: Block }) {
   );
   return (
     <Section tone={(b.tone as Tone) || "white"} style={sectionStyle(b)}>
-      <div className="grid-2">
+      <div className={`grid-2 ${left ? "image-text--left" : "image-text--right"}`.trim()}>
         {left ? image : text}
         {left ? text : image}
       </div>

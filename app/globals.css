@@ -379,6 +379,8 @@ img, svg, video { max-width: 100%; display: block; }
 /* Responsive */
 @media (max-width: 900px) {
   .hero__grid, .grid-2, .svc, .contact__grid, .approach-grid { grid-template-columns: 1fr !important; }
+  .image-text--right > :first-child { order: 2; }
+  .image-text--right > :last-child { order: 1; }
   .hero .nhm-badge--eyebrow { white-space: normal; display: inline-block; max-width: 24ch; line-height: 1.35; }
   .hero__title { font-size: clamp(2rem, 9vw, 2.5rem); overflow-wrap: anywhere; word-break: normal; }
   .hero__sub, .hero__sub2 { max-width: 100%; }
