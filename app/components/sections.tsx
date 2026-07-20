@@ -125,7 +125,7 @@ function HeroBlock({ b }: { b: Block }) {
         </div>
       </Section>
       {hasTicker ? (
-        <Section tone={(b.tone as Tone) || "cream"} className="hero-ticker-section" style={{ paddingTop: "clamp(1.5rem, 3vw, 2.5rem)" }}>
+        <Section tone={(b.tone as Tone) || "cream"} className="hero-ticker-section" style={{ paddingTop: "clamp(1rem, 2.2vw, 1.85rem)" }}>
           <Reveal delay={0.08} y={0}>
             <div className="hero__ticker">
               {tickerHeading ? <p className="hero__ticker-heading">{tickerHeading}</p> : null}

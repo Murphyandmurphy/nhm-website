@@ -235,8 +235,8 @@ img, svg, video { max-width: 100%; display: block; }
 .hero__ticker-heading { font-family: var(--font-sans); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); margin: 0 0 0.9rem; }
 .hero__ticker-viewport { overflow: hidden; width: 100%; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
 .hero__ticker-track { display: flex; align-items: center; gap: 2.5rem; width: max-content; animation: hero-logo-marquee 60s linear infinite; }
-.hero__ticker-item { display: inline-flex; align-items: center; justify-content: center; min-width: 180px; }
-.hero__ticker-logo { height: 62px; width: auto; max-width: 212px; object-fit: contain; opacity: 0.94; }
+.hero__ticker-item { display: inline-flex; align-items: center; justify-content: center; min-width: 210px; }
+.hero__ticker-logo { height: 74px; width: auto; max-width: 248px; object-fit: contain; opacity: 0.94; }
 .hero__ticker-name { font-family: var(--font-display); font-weight: 300; font-size: 1rem; color: var(--ink-700); white-space: nowrap; }
 
 @keyframes hero-logo-marquee {
