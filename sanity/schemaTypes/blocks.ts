@@ -93,7 +93,9 @@ export const heroSection = defineType({
     defineField({ name: "primaryHref", title: "Primary button link", type: "string" }),
     defineField({ name: "secondaryLabel", title: "Secondary button label", type: "string" }),
     defineField({ name: "secondaryHref", title: "Secondary button link", type: "string" }),
-    defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+    defineField({ name: "image", title: "Main image (large)", type: "image", options: { hotspot: true } }),
+    defineField({ name: "imageMedium", title: "Secondary image (medium)", type: "image", options: { hotspot: true } }),
+    defineField({ name: "imageSmall", title: "Tertiary image (small)", type: "image", options: { hotspot: true } }),
     defineField({ name: "logoTickerHeading", title: "Logo ticker heading", type: "string", initialValue: "I've helped..." }),
     defineField({
       name: "logoTickerBrands",
