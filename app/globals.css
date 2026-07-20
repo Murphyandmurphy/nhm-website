@@ -388,7 +388,7 @@ img, svg, video { max-width: 100%; display: block; }
   .hero__ctas > * { max-width: 100%; }
   .hero__ctas .nhm-btn { white-space: normal; }
   .hero__slideshow { min-height: 360px; margin-top: 1rem; }
-  .hero-ticker-section { padding-top: 0; padding-bottom: 1.75rem; }
+  .hero-ticker-section { padding-top: 2rem; padding-bottom: 2rem; }
   .hero__ticker { margin-top: 0; }
   .grid-3 { grid-template-columns: 1fr; }
   .logostrip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
