@@ -107,7 +107,7 @@ function HeroBlock({ b }: { b: Block }) {
                     image={image}
                     alt={index === 0 ? (b.eyebrow || "") : ""}
                     fallback={{ label: "Hero image", icon: "Camera" }}
-                    style={{ aspectRatio: "4 / 5", minHeight: "380px", height: "100%" }}
+                    style={{ aspectRatio: "1 / 1.08", minHeight: "460px", height: "100%", width: "100%", borderRadius: "var(--radius-lg)" }}
                   />
                 </div>
               ))
@@ -116,7 +116,7 @@ function HeroBlock({ b }: { b: Block }) {
                 image={b.image as SanityImageValue}
                 alt={b.eyebrow || ""}
                 fallback={{ label: "Hero image", icon: "Camera" }}
-                style={{ aspectRatio: "4 / 5", minHeight: "380px" }}
+                style={{ aspectRatio: "1 / 1.08", minHeight: "460px", width: "100%", borderRadius: "var(--radius-lg)" }}
               />
             )}
           </div>
