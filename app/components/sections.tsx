@@ -72,81 +72,85 @@ function HeroBlock({ b }: { b: Block }) {
   const loopBrands = [...tickerBrands, ...tickerBrands];
 
   return (
-    <Section tone={(b.tone as Tone) || "cream"} className="hero" style={sectionStyle(b)}>
-      <div className="hero__grid">
-        <div>
-          <Reveal>
-            {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
-            <RichHeading as="h1" text={b.title} className="hero__title" style={{ marginTop: "1rem" }} />
-            {b.sub ? <p className="hero__sub">{b.sub}</p> : null}
-            {b.sub2 ? <p className="hero__sub2">{b.sub2}</p> : null}
-            <div className="hero__ctas">
-              {b.primaryLabel ? (
-                <Button variant="primary" size="lg" iconRight="ArrowRight" href={b.primaryHref || "/contact"}>
-                  {b.primaryLabel}
-                </Button>
-              ) : null}
-              {b.secondaryLabel ? (
-                <Button variant="secondary" size="lg" href={b.secondaryHref || "/about"}>
-                  {b.secondaryLabel}
-                </Button>
-              ) : null}
+    <>
+      <Section tone={(b.tone as Tone) || "cream"} className="hero" style={sectionStyle(b)}>
+        <div className="hero__grid">
+          <div>
+            <Reveal>
+              {b.eyebrow ? <Badge variant="eyebrow">{b.eyebrow}</Badge> : null}
+              <RichHeading as="h1" text={b.title} className="hero__title" style={{ marginTop: "1rem" }} />
+              {b.sub ? <p className="hero__sub">{b.sub}</p> : null}
+              {b.sub2 ? <p className="hero__sub2">{b.sub2}</p> : null}
+              <div className="hero__ctas">
+                {b.primaryLabel ? (
+                  <Button variant="primary" size="lg" iconRight="ArrowRight" href={b.primaryHref || "/contact"}>
+                    {b.primaryLabel}
+                  </Button>
+                ) : null}
+                {b.secondaryLabel ? (
+                  <Button variant="secondary" size="lg" href={b.secondaryHref || "/about"}>
+                    {b.secondaryLabel}
+                  </Button>
+                ) : null}
+              </div>
+            </Reveal>
+          </div>
+          <Reveal delay={0.1}>
+            <div className="hero__slideshow">
+              {heroSlides.length ? (
+                heroSlides.map((image, index) => (
+                  <div
+                    key={image?.asset?._ref || index}
+                    className="hero__slide"
+                    style={{ animationDelay: `${index * 5}s` }}
+                  >
+                    <SanityImage
+                      image={image}
+                      alt={index === 0 ? (b.eyebrow || "") : ""}
+                      fallback={{ label: "Hero image", icon: "Camera" }}
+                      style={{ aspectRatio: "1 / 1.08", minHeight: "460px", height: "100%", width: "100%", borderRadius: "var(--radius-lg)" }}
+                    />
+                  </div>
+                ))
+              ) : (
+                <SanityImage
+                  image={b.image as SanityImageValue}
+                  alt={b.eyebrow || ""}
+                  fallback={{ label: "Hero image", icon: "Camera" }}
+                  style={{ aspectRatio: "1 / 1.08", minHeight: "460px", width: "100%", borderRadius: "var(--radius-lg)" }}
+                />
+              )}
             </div>
           </Reveal>
         </div>
-        <Reveal delay={0.1}>
-          <div className="hero__slideshow">
-            {heroSlides.length ? (
-              heroSlides.map((image, index) => (
-                <div
-                  key={image?.asset?._ref || index}
-                  className="hero__slide"
-                  style={{ animationDelay: `${index * 5}s` }}
-                >
-                  <SanityImage
-                    image={image}
-                    alt={index === 0 ? (b.eyebrow || "") : ""}
-                    fallback={{ label: "Hero image", icon: "Camera" }}
-                    style={{ aspectRatio: "1 / 1.08", minHeight: "460px", height: "100%", width: "100%", borderRadius: "var(--radius-lg)" }}
-                  />
-                </div>
-              ))
-            ) : (
-              <SanityImage
-                image={b.image as SanityImageValue}
-                alt={b.eyebrow || ""}
-                fallback={{ label: "Hero image", icon: "Camera" }}
-                style={{ aspectRatio: "1 / 1.08", minHeight: "460px", width: "100%", borderRadius: "var(--radius-lg)" }}
-              />
-            )}
-          </div>
-        </Reveal>
-      </div>
+      </Section>
       {hasTicker ? (
-        <Reveal delay={0.08} y={0}>
-          <div className="hero__ticker">
-            {tickerHeading ? <p className="hero__ticker-heading">{tickerHeading}</p> : null}
-            <div className="hero__ticker-viewport">
-              <div className="hero__ticker-track" aria-hidden="true">
-                {loopBrands.map((brand, i) => (
-                  <div className="hero__ticker-item" key={`${brand.name || "brand"}-${i}`}>
-                    {brand.logo?.asset?._ref ? (
-                      <img
-                        src={urlFor(brand.logo as never).height(192).dpr(2).fit("max").auto("format").url()}
-                        alt={brand.name || "Client logo"}
-                        className="hero__ticker-logo"
-                      />
-                    ) : (
-                      <span className="hero__ticker-name">{brand.name || "Brand"}</span>
-                    )}
-                  </div>
-                ))}
+        <Section tone={(b.tone as Tone) || "cream"} className="hero-ticker-section" style={{ paddingTop: 0 }}>
+          <Reveal delay={0.08} y={0}>
+            <div className="hero__ticker">
+              {tickerHeading ? <p className="hero__ticker-heading">{tickerHeading}</p> : null}
+              <div className="hero__ticker-viewport">
+                <div className="hero__ticker-track" aria-hidden="true">
+                  {loopBrands.map((brand, i) => (
+                    <div className="hero__ticker-item" key={`${brand.name || "brand"}-${i}`}>
+                      {brand.logo?.asset?._ref ? (
+                        <img
+                          src={urlFor(brand.logo as never).height(192).dpr(2).fit("max").auto("format").url()}
+                          alt={brand.name || "Client logo"}
+                          className="hero__ticker-logo"
+                        />
+                      ) : (
+                        <span className="hero__ticker-name">{brand.name || "Brand"}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </Section>
       ) : null}
-    </Section>
+    </>
   );
 }
 

@@ -93,11 +93,18 @@ export function Header({ settings }: { settings?: Settings }) {
                   key={item.href + item.label}
                   href={item.href}
                   className={`nav__link ${isActive(item.href) ? "nav__link--active" : ""}`.trim()}
-                  style={{ textAlign: "left", padding: "0.75rem 0", fontSize: "1.05rem" }}
+                  style={{ textAlign: "left", padding: "0.75rem 0", fontSize: "2.1rem", lineHeight: 1.15 }}
                 >
                   {item.label}
                 </Link>
               ))}
+              {ctaLabel ? (
+                <div style={{ marginTop: "0.9rem" }}>
+                  <Button variant="primary" size="lg" iconRight="ArrowRight" href={ctaHref}>
+                    {ctaLabel}
+                  </Button>
+                </div>
+              ) : null}
             </Container>
           </motion.div>
         ) : null}
