@@ -379,11 +379,13 @@ img, svg, video { max-width: 100%; display: block; }
 /* Responsive */
 @media (max-width: 900px) {
   .hero__grid, .grid-2, .svc, .contact__grid, .approach-grid { grid-template-columns: 1fr !important; }
+  .hero .nhm-badge--eyebrow { white-space: normal; display: inline-block; max-width: 24ch; line-height: 1.35; }
   .hero__title { font-size: clamp(2rem, 9vw, 2.5rem); overflow-wrap: anywhere; word-break: normal; }
   .hero__sub, .hero__sub2 { max-width: 100%; }
   .hero__ctas > * { max-width: 100%; }
   .hero__ctas .nhm-btn { white-space: normal; }
-  .hero__slideshow { min-height: 360px; margin-top: 1rem; }
+  .hero__slideshow { min-height: 360px; margin-top: 1rem; margin-bottom: 1.75rem; }
+  .hero__ticker { margin-top: 0; }
   .grid-3 { grid-template-columns: 1fr; }
   .logostrip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer__grid { grid-template-columns: 1fr; }
