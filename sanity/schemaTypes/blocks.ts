@@ -94,6 +94,14 @@ export const heroSection = defineType({
     defineField({ name: "secondaryLabel", title: "Secondary button label", type: "string" }),
     defineField({ name: "secondaryHref", title: "Secondary button link", type: "string" }),
     defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "heroSlides",
+      title: "Hero slideshow images",
+      description: "Up to 5 images for the automatically scrolling slideshow on the right-hand side of the hero.",
+      type: "array",
+      of: [defineArrayMember({ type: "image", options: { hotspot: true } })],
+      validation: (Rule) => Rule.max(5),
+    }),
     defineField({ name: "logoTickerHeading", title: "Logo ticker heading", type: "string", initialValue: "I've helped..." }),
     defineField({
       name: "logoTickerBrands",

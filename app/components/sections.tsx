@@ -61,10 +61,11 @@ function Heading({ eyebrow, title, lead }: { eyebrow?: string; title?: string; l
 }
 
 function HeroBlock({ b }: { b: Block }) {
-  const mainImage = b.image as SanityImageValue;
-  const mediumImage = (b.imageMedium as SanityImageValue) || mainImage;
-  const smallImage = (b.imageSmall as SanityImageValue) || mainImage;
-
+  const heroSlides: SanityImageValue[] = Array.isArray(b.heroSlides) && b.heroSlides.length
+    ? (b.heroSlides.slice(0, 5) as SanityImageValue[])
+    : b.image
+      ? [b.image as SanityImageValue]
+      : [];
   const tickerHeading = b.logoTickerHeading as string | undefined;
   const tickerBrands: { name?: string; logo?: SanityImageValue }[] = b.logoTickerBrands || [];
   const hasTicker = tickerBrands.length > 0;
@@ -94,31 +95,30 @@ function HeroBlock({ b }: { b: Block }) {
           </Reveal>
         </div>
         <Reveal delay={0.1}>
-          <div className="hero__cluster">
-            <div className="hero__cluster-card hero__cluster-card--big">
+          <div className="hero__slideshow">
+            {heroSlides.length ? (
+              heroSlides.map((image, index) => (
+                <div
+                  key={image?.asset?._ref || index}
+                  className="hero__slide"
+                  style={{ animationDelay: `${index * 5}s` }}
+                >
+                  <SanityImage
+                    image={image}
+                    alt={index === 0 ? (b.eyebrow || "") : ""}
+                    fallback={{ label: "Hero image", icon: "Camera" }}
+                    style={{ aspectRatio: "4 / 5", minHeight: "380px", height: "100%" }}
+                  />
+                </div>
+              ))
+            ) : (
               <SanityImage
-                image={mainImage}
+                image={b.image as SanityImageValue}
                 alt={b.eyebrow || ""}
                 fallback={{ label: "Hero image", icon: "Camera" }}
-                style={{ aspectRatio: "4 / 5", height: "100%" }}
+                style={{ aspectRatio: "4 / 5", minHeight: "380px" }}
               />
-            </div>
-            <div className="hero__cluster-card hero__cluster-card--medium">
-              <SanityImage
-                image={mediumImage}
-                alt=""
-                fallback={{ label: "Secondary image", icon: "Image" }}
-                style={{ aspectRatio: "1 / 1", height: "100%" }}
-              />
-            </div>
-            <div className="hero__cluster-card hero__cluster-card--small">
-              <SanityImage
-                image={smallImage}
-                alt=""
-                fallback={{ label: "Detail image", icon: "Image" }}
-                style={{ aspectRatio: "1 / 1", height: "100%" }}
-              />
-            </div>
+            )}
           </div>
         </Reveal>
       </div>
