@@ -87,13 +87,13 @@ export function Header({ settings }: { settings?: Settings }) {
             transition={{ duration: 0.24, ease: [0.22, 0.61, 0.36, 1] }}
             style={{ overflow: "hidden", borderTop: "1px solid var(--line-200)", background: "var(--cream-100)" }}
           >
-            <Container style={{ paddingBlock: "1rem", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            <Container style={{ paddingBlock: "1.5rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
               {navItems.map((item) => (
                 <Link
                   key={item.href + item.label}
                   href={item.href}
                   className={`nav__link ${isActive(item.href) ? "nav__link--active" : ""}`.trim()}
-                  style={{ textAlign: "left", padding: "0.75rem 0", fontSize: "2.1rem", lineHeight: 1.15 }}
+                  style={{ textAlign: "left", padding: "1.15rem 0", fontSize: "2.1rem", lineHeight: 1.15 }}
                 >
                   {item.label}
                 </Link>
