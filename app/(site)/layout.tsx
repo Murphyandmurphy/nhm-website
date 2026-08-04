@@ -1,6 +1,7 @@
 import "../globals.css";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
+import { CookieConsent } from "@/app/components/interactive/CookieConsent";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { siteSettingsQuery } from "@/sanity/lib/queries";
 
@@ -24,6 +25,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header settings={settings} />
       <main>{children}</main>
       <Footer settings={settings} />
+      <CookieConsent />
     </div>
   );
 }
