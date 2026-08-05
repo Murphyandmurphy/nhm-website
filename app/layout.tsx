@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   title: "Nadia Henrique-Murray — Strategic marketing for food & drink",
   description:
     "Senior strategic marketing support for food and drink SMEs with real ambitions to grow.",
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({
