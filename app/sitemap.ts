@@ -22,7 +22,7 @@ function getBaseUrl() {
   const vercel = process.env.VERCEL_URL;
   if (vercel) return `https://${vercel.replace(/\/$/, "")}`;
 
-  return "https://www.nadiahm.co.uk";
+  return "https://nadiahm.co.uk";
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
