@@ -7,8 +7,8 @@ type ConsentState = "accepted" | "declined" | null;
 
 const STORAGE_KEY = "nhm_cookie_consent";
 
-export function CookieConsent() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+export function CookieConsent({ gaId: gaIdProp }: { gaId?: string } = {}) {
+  const gaId = gaIdProp || process.env.NEXT_PUBLIC_GA_ID || process.env.GA_ID;
   const [consent, setConsent] = useState<ConsentState>(null);
   const [hydrated, setHydrated] = useState(false);
   const [showBanner, setShowBanner] = useState(false);

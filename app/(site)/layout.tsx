@@ -20,12 +20,13 @@ export type SiteSettings = {
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const settings: SiteSettings = (await sanityFetch<SiteSettings | null>(siteSettingsQuery)) || {};
+  const gaId = process.env.GA_ID || process.env.NEXT_PUBLIC_GA_ID;
   return (
     <div className="site">
       <Header settings={settings} />
       <main>{children}</main>
       <Footer settings={settings} />
-      <CookieConsent />
+      <CookieConsent gaId={gaId} />
     </div>
   );
 }
