@@ -9,7 +9,7 @@ type TestimonialProps = {
   className?: string;
 };
 
-/** Testimonial — bold Larken-set client quote with attribution. */
+/** Testimonial — bold Sentient-set client quote with attribution. */
 export function Testimonial({
   quote,
   name,

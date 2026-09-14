@@ -14,7 +14,7 @@ function normalize(b: BrandItem): { name: string; logo?: SanityImageValue } {
 /**
  * LogoStrip — single-tone brand logos on the section background.
  * Each item shows its uploaded logo (greyscaled + softened), or falls back
- * to the brand name set in Larken if no logo image has been added yet.
+ * to the brand name set in Sentient if no logo image has been added yet.
  */
 export function LogoStrip({ brands, recolor = true }: LogoStripProps) {
   return (

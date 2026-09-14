@@ -8,7 +8,7 @@ type SectionHeadingProps = {
   align?: React.CSSProperties["textAlign"];
 };
 
-/** SectionHeading — eyebrow + Larken title + optional lead. */
+/** SectionHeading — eyebrow + Sentient title + optional lead. */
 export function SectionHeading({ eyebrow, title, lead, center, align }: SectionHeadingProps) {
   return (
     <div className={`shead ${center ? "shead--center" : ""}`.trim()} style={align ? { textAlign: align } : undefined}>
