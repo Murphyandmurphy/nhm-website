@@ -2,7 +2,7 @@
    Nadia Henrique-Murray / Appétit — global stylesheet
    Tailwind layers + design-system tokens + component & layout CSS.
    Fonts are injected by next/font (see app/layout.tsx), which exposes
-   --font-larken and --font-hanken; we alias them to the brand roles.
+  --font-sentient and --font-hanken; we alias them to the brand roles.
    ============================================================ */
 @tailwind base;
 @tailwind components;
@@ -11,7 +11,7 @@
 /* ---------------- TOKENS ---------------- */
 :root {
   /* Families (next/font variables → brand roles) */
-  --font-display: var(--font-larken), "Hanken Grotesk", Georgia, serif;
+  --font-display: var(--font-sentient), "Hanken Grotesk", Georgia, serif;
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Menlo", monospace;
 

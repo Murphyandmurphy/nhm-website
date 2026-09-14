@@ -9,12 +9,12 @@ const hanken = Hanken_Grotesk({
   display: "swap",
 });
 
-const larken = localFont({
+const sentient = localFont({
   src: [
-    { path: "../public/fonts/larken-light.ttf", weight: "300", style: "normal" },
-    { path: "../public/fonts/larken-light-italic.ttf", weight: "300", style: "italic" },
+    { path: "../public/fonts/Sentient-Light.woff2", weight: "300", style: "normal" },
+    { path: "../public/fonts/Sentient-LightItalic.woff2", weight: "300", style: "italic" },
   ],
-  variable: "--font-larken",
+  variable: "--font-sentient",
   display: "swap",
 });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${hanken.variable} ${larken.variable}`}>
+    <html lang="en" className={`${hanken.variable} ${sentient.variable}`}>
       <body>
         {children}
       </body>

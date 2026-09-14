@@ -24,7 +24,7 @@ const config: Config = {
         amber: { 50: "#f8ecd6", 400: "#e2a23b" },
       },
       fontFamily: {
-        display: ["var(--font-larken)", "Georgia", "serif"],
+        display: ["var(--font-sentient)", "Georgia", "serif"],
         sans: ["var(--font-hanken)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       borderRadius: {
