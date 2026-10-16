@@ -11,7 +11,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm({
   successTitle = "Thank you — message sent",
-  successBody = "I'll be in touch within a couple of working days to arrange your discovery call.",
+  successBody = "Thanks for getting in touch. I'll get back to you as soon as I can.",
 }: {
   successTitle?: string;
   successBody?: string;
