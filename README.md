@@ -13,6 +13,18 @@ MAILERLITE_GROUP_ID=your_mailerlite_group_id
 
 The MailerLite group ID should be the audience/group you want new subscribers added to.
 
+## Contact form email
+
+The contact form posts to `/api/contact`, which sends enquiries through Resend. Add these server-side environment variables to `.env.local` and to the Vercel project:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_TO_EMAIL=hello@yourdomain.co.uk
+CONTACT_FROM_EMAIL="Website enquiries <website@send.yourdomain.co.uk>"
+```
+
+Verify the sender domain in Resend and replace the example addresses with your real inbox and verified sender. After adding or changing the Vercel variables, redeploy the site. Keep `RESEND_API_KEY` private and do not use a `NEXT_PUBLIC_` prefix.
+
 Marketing site for Nadia Henrique-Murray (brand "Appétit"), fully editable via **Sanity CMS**.
 
 **Stack:** Next.js 15 (App Router) · TypeScript · Tailwind CSS · Framer Motion ·
@@ -173,11 +185,9 @@ public/  fonts/ logo/
 
 ---
 
-## 5. Still to wire up before launch
+## 5. Still to complete before launch
 
-1. **Contact form** — shows a success state but doesn't send email yet. Wire
-   `app/components/interactive/ContactForm.tsx` to a service (Formspree, Resend,
-   or a Next.js Route Handler / Server Action).
+1. **Contact form** — configure the Resend environment variables above and verify a test submission.
 2. **Real images & logos** — upload via the Studio image fields.
 3. **LinkedIn URL** — set the real one in **Site Settings**.
 
@@ -186,8 +196,7 @@ public/  fonts/ logo/
 ## 6. Deploying to Vercel
 
 1. Push this folder to a Git repo and import it at **vercel.com**.
-2. Add the three `NEXT_PUBLIC_SANITY_*` environment variables (same as
-   `.env.local`) in the Vercel project settings.
+2. Add the `NEXT_PUBLIC_SANITY_*` variables, the MailerLite variables above, and the Resend contact form variables in the Vercel project settings. Keep API keys server-side and never prefix them with `NEXT_PUBLIC_`.
 3. Deploy. Your Studio will be live at `your-domain.com/studio`.
 4. Point your 123-reg domain at Vercel in the Vercel **Domains** settings.
 
